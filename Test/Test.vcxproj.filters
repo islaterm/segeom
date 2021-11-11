@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="PointTest.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorTest.cpp">
+      <Filter>Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorUtils.cpp">
+      <Filter>Source Files\TestUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUtils\CommonUtils.cpp">
+      <Filter>Source Files\TestUtils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\Windows Kits\10\Include\10.0.19041.0\ucrt\math.h" />
+    <ClInclude Include="Primitives\VectorUtils.h">
+      <Filter>Header Files\TestUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUtils\CommonUtils.h">
+      <Filter>Header Files\TestUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Primitives">
+      <UniqueIdentifier>{fb080cd5-5f35-4c78-ba58-99cc42951a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4faec1fe-32d8-4ba8-8cb2-92bbf1898804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{12aa9f3d-4be1-4c9e-ba17-146f65bda383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TestUtils">
+      <UniqueIdentifier>{21a2608e-3fda-4be7-8f14-fa67a9e825ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TestUtils">
+      <UniqueIdentifier>{a39f713f-ea88-4e65-992e-96857d12cd7f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
