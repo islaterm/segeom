@@ -12,7 +12,7 @@ class VectorTest : public ::testing::Test {
 
  public:
   int seed = 0;
-  Utils::Random* rng;
+  Utils::Random* rng = nullptr;
   int x = 0;
   int y = 0;
   int z = 0;
@@ -25,7 +25,6 @@ class VectorTest : public ::testing::Test {
 
 void VectorTest::SetUp() {
   initRandom();
-  Utils::Random* rng = new Utils::Random(seed);
   this->x = rng->nextDouble(-5000000, 5000000);
   this->y = rng->nextDouble(-5000000, 5000000);
   this->z = rng->nextDouble(-5000000, 5000000);
@@ -34,7 +33,7 @@ void VectorTest::SetUp() {
 }
 
 void VectorTest::TearDown() {
-  //delete testVector;
+  // delete testVector;
   if (::testing::Test::HasFailure()) {
     std::cout << "Test failed with seed = " << seed << std::endl;
   }
@@ -45,11 +44,20 @@ void VectorTest::initRandom() {
   std::default_random_engine engine(r());
   std::uniform_int_distribution<int> intDist(-500000, 500000);
   seed = intDist(engine);
+  rng = new Utils::Random(seed);
 }
 
-TEST_F(VectorTest, ConstructorTest) {
+TEST_F(VectorTest, Equals) {
   Primitives::Vector<double> expectedVector(x, y, z);
   EXPECT_EQ(expectedVector, *testVector);
+}
+
+TEST_F(VectorTest, Distinct) {
+  Primitives::Vector<double> unexpected(
+      x + rng->nextNonZeroDouble(-1000, 1000),
+      y + rng->nextNonZeroDouble(-1000, 1000),
+      z + rng->nextNonZeroDouble(-1000, 1000));
+  EXPECT_NE(unexpected, *testVector);
 }
 
 TEST_F(VectorTest, NormalizationTest) {
@@ -80,6 +88,7 @@ TEST_F(VectorTest, CrossProductTest) {
   EXPECT_EQ(expected, *actual);
 }
 
+#pragma region ADDITION
 TEST_F(VectorTest, IdentityAdditionTest) {
   EXPECT_EQ(*testVector, *testVector + *zeroVector);
 }
@@ -94,12 +103,15 @@ TEST_F(VectorTest, AssociativeAddition) {
   Primitives::Vector<double> v2 = Utils::randVector();
   EXPECT_EQ((*testVector + v1) + v2, *testVector + (v1 + v2));
 }
+#pragma endregion
 
-TEST_F(VectorTest, BasicAddition) {
-  Primitives::Vector<double> v1(1, 2, 3);
-  Primitives::Vector<double> v2(11, 420, 69);
-  Primitives::Vector<double> actual = v1 + v2;
-  EXPECT_EQ(12, actual.getX());
-  EXPECT_EQ(422, actual.getY());
-  EXPECT_EQ(72, actual.getZ());
+#pragma region SUBTRACTION
+TEST_F(VectorTest, IdentitySubtraction) {
+  EXPECT_EQ(*testVector, *testVector - *zeroVector);
 }
+
+TEST_F(VectorTest, AdditiveInverse) {
+  Primitives::Vector<double> v = Utils::randVector();
+  EXPECT_EQ(*zeroVector, *testVector - *testVector);
+}
+#pragma endregion

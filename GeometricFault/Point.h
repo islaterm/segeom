@@ -110,6 +110,11 @@ inline bool operator==(const Point<T>& left, const Point<T>& right) {
          abs(left.getZ() - right.getZ()) < utils::DELTA;
 }
 
+template <class T>
+inline bool operator!=(const Point<T>& left, const Point<T>& right) {
+  return !(left == right);
+}
+
 #pragma region COMPOUND ASSIGNMENTS
 template <class T>
 Point<T>& Point<T>::operator+=(const Point<T>& addend) {
@@ -123,7 +128,7 @@ template <class T>
 inline Point<T>& Point<T>::operator-=(const Point<T>& subtrahend) {
   this->_x -= subtrahend._x;
   this->_y -= subtrahend._y;
-  this->_z - +subtrahend._z;
+  this->_z -= subtrahend._z;
   return *this;
 }
 

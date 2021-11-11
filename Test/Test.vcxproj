@@ -35,7 +35,6 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\Windows Kits\10\Include\10.0.19041.0\ucrt\math.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Primitives\VectorUtils.h" />
     <ClInclude Include="TestUtils\CommonUtils.h" />
     <ClInclude Include="VectorTest.h" />

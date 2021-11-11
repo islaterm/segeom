@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <iostream>
 
 #include "Point.h"
 #include "utils.h"
@@ -21,6 +22,13 @@ class Vector {
   friend Vector<T> operator+(Vector<T> lAddend, const Vector<T>& rAddend) {
     lAddend += rAddend;
     return lAddend;
+  }
+  /// <summary>
+  ///   Performs the subtraction of two vectors.
+  /// </summary>
+  friend Vector<T> operator-(Vector<T> minuend, const Vector<T>& subtrahend) {
+    minuend -= subtrahend;
+    return minuend;
   }
 #pragma endregion
 
@@ -58,14 +66,14 @@ class Vector {
 
   #pragma region COMPOUND ASSIGNMENTS
   /// <summary>
-  ///   Addition compound assignment for a point.
+  ///   Addition compound assignment for a vector.
   /// </summary>
   Vector<T>& operator+=(const Vector<T>& addend);
 
   /// <summary>
-  ///   Subtraction compound assignment for a point.
+  ///   Subtraction compound assignment for a vector.
   /// </summary>
-  //Vector<T>& operator-=(const Vector<T>& addend);
+  Vector<T>& operator-=(const Vector<T>& subtrahend);
 #pragma endregion
 
   /// <summary>
@@ -91,6 +99,17 @@ template <class T>
 inline bool operator==(const Vector<T>& left, const Vector<T>& right) {
   return left.getHead() == right.getHead();
 }
+
+template <class T>
+inline bool operator!=(const Vector<T>& left, const Vector<T>& right) {
+  return !(left.getHead() == right.getHead());
+}
+
+//template <class T>
+//inline std::ostream operator<<(std::ostream &stream, const Vector<T> &v) {
+//  return stream << "Vector{x: " << v.getX() << ", y: " << v.getY()
+//              << ", z: " << v.getZ() << "}";
+//}
 
 template <class T>
 inline Vector<double>* Vector<T>::normalized() {
@@ -120,6 +139,12 @@ inline Vector<T>* Vector<T>::cross(const Vector<T>& v) const {
 template <class T>
 inline Vector<T>& Vector<T>::operator+=(const Vector<T>& addend) {
   this->head += addend.getHead();
+  return *this;
+}
+
+template <class T>
+inline Vector<T>& Vector<T>::operator-=(const Vector<T>& subtrahend) {
+  this->head -= subtrahend.getHead();
   return *this;
 }
 

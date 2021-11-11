@@ -10,3 +10,10 @@ Segeom::Primitives::Vector<double> Segeom::TestUtils::randVector() {
   Segeom::Primitives::Vector<double> v(x2, y2, z2);
   return v;
 }
+
+Segeom::Primitives::Vector<double> Segeom::TestUtils::randVector(Random* rng) {
+  Segeom::Primitives::Vector<double> v(rng->nextDouble(-1000, 1000),
+                                       rng->nextDouble(-1000, 1000),
+                                       rng->nextDouble(-1000, 1000));
+  return v;
+}

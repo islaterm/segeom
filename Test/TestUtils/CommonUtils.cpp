@@ -18,4 +18,13 @@ double Segeom::TestUtils::Random::nextDouble(double lo, double hi) {
   return dist(*rng) * (hi - lo) + lo;
 }
 
+double Segeom::TestUtils::Random::nextNonZeroDouble(double lo, double hi) {
+  while (true) {
+    double r = nextDouble(lo, hi);
+    if (std::abs(r) >= Segeom::TestUtils::DELTA) {
+      return r;
+    }
+  }
+}
+
 long Segeom::TestUtils::Random::getSeed() { return seed; }
