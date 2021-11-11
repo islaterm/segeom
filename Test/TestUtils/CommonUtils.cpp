@@ -4,6 +4,14 @@ double Segeom::TestUtils::randDouble(double lo, double hi) {
   return rand() * (hi - lo) + lo;
 }
 
+void Segeom::TestUtils::initRandom(long* seed, Random** rng) {
+  std::random_device r;
+  std::default_random_engine engine(r());
+  std::uniform_int_distribution<int> intDist(-500000, 500000);
+  *seed = intDist(engine);
+  *rng = new Segeom::TestUtils::Random(*seed);
+}
+
 Segeom::TestUtils::Random::Random() : Random(time(0)) {}
 
 Segeom::TestUtils::Random::Random(long seed) {

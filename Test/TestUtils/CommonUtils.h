@@ -33,5 +33,10 @@ class Random {
   std::mt19937_64 *rng;
 };
 double randDouble(double lo, double hi);
+
+/// <summary>
+/// Initializes a random number generator and it's seed.
+/// </summary>
+void initRandom(long *seed, Random **rng);
 }  // namespace TestUtils
 }  // namespace Segeom
