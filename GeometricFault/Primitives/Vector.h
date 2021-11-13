@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Point.h"
-#include "utils.h"
+#include "../utils.h"
 
 using namespace Segeom::Utils;
 

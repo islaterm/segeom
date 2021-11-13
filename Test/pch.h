@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../GeometricFault/Point.h"
+#include "../GeometricFault/Primitives/Point.h"
 #include "gtest/gtest.h"
 
 int randInt(int lo, int hi);

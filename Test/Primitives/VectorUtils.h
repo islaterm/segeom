@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../GeometricFault/Vector.h"
+#include "../../GeometricFault/Primitives/Vector.h"
 #include "../TestUtils/CommonUtils.h"
 
 namespace Segeom {

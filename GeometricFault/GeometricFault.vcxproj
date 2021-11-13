@@ -139,13 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GeometricFault.cpp" />
+    <ClCompile Include="Primitives\Point.cpp" />
+    <ClCompile Include="Primitives\Vector.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point.h" />
+    <ClInclude Include="Primitives\Point.h" />
+    <ClInclude Include="Primitives\Vector.h" />
     <ClInclude Include="utils.h" />
-    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
-#include "VectorTest.h"
-
-#include <math.h>
+#include "Testing.h"
+#include "Primitives/VectorUtils.h"
 
 namespace Utils = Segeom::TestUtils;
 namespace Primitives = Segeom::Primitives;
@@ -11,41 +10,23 @@ class VectorTest : public ::testing::Test {
   void TearDown() override;
 
  public:
-  int seed = 0;
+  long seed = 0;
   Utils::Random* rng = nullptr;
-  int x = 0;
-  int y = 0;
-  int z = 0;
+  double x = 0;
+  double y = 0;
+  double z = 0;
   Primitives::Vector<double>* testVector = nullptr;
   Primitives::Vector<double>* zeroVector = nullptr;
-
- private:
-  void initRandom();
 };
 
 void VectorTest::SetUp() {
-  initRandom();
-  this->x = rng->nextDouble(-5000000, 5000000);
-  this->y = rng->nextDouble(-5000000, 5000000);
-  this->z = rng->nextDouble(-5000000, 5000000);
+  Utils::initRandom(&seed, &rng);
+  Utils::randomCoordinates(&x, &y, &z, rng);
   this->testVector = new Primitives::Vector<double>(x, y, z);
   this->zeroVector = new Primitives::Vector<double>(0, 0, 0);
 }
 
-void VectorTest::TearDown() {
-  // delete testVector;
-  if (::testing::Test::HasFailure()) {
-    std::cout << "Test failed with seed = " << seed << std::endl;
-  }
-}
-
-void VectorTest::initRandom() {
-  std::random_device r;
-  std::default_random_engine engine(r());
-  std::uniform_int_distribution<int> intDist(-500000, 500000);
-  seed = intDist(engine);
-  rng = new Utils::Random(seed);
-}
+void VectorTest::TearDown() { notifyOnFailure(seed); }
 
 TEST_F(VectorTest, Equals) {
   Primitives::Vector<double> expectedVector(x, y, z);
@@ -99,8 +80,8 @@ TEST_F(VectorTest, CommutativeAddition) {
 }
 
 TEST_F(VectorTest, AssociativeAddition) {
-  Primitives::Vector<double> v1 = Utils::randVector();
-  Primitives::Vector<double> v2 = Utils::randVector();
+  Primitives::Vector<double> v1 = Utils::randVector(rng);
+  Primitives::Vector<double> v2 = Utils::randVector(rng);
   EXPECT_EQ((*testVector + v1) + v2, *testVector + (v1 + v2));
 }
 #pragma endregion

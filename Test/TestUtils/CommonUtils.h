@@ -38,5 +38,11 @@ double randDouble(double lo, double hi);
 /// Initializes a random number generator and it's seed.
 /// </summary>
 void initRandom(long *seed, Random **rng);
+
+/// <summary>
+/// Assign a random value to a triplet of coordinates (x, y, z) with a given
+/// random number generator.
+/// </summary>
+void randomCoordinates(double *x, double *y, double *z, Random *rng);
 }  // namespace TestUtils
 }  // namespace Segeom

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../GeometricFault/Point.h"
+#include "../GeometricFault/Primitives/Point.h"
 #include "TestUtils/CommonUtils.h"
 #include "gtest/gtest.h"
 

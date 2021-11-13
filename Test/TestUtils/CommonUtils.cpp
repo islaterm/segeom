@@ -9,7 +9,14 @@ void Segeom::TestUtils::initRandom(long* seed, Random** rng) {
   std::default_random_engine engine(r());
   std::uniform_int_distribution<int> intDist(-500000, 500000);
   *seed = intDist(engine);
-  *rng = new Segeom::TestUtils::Random(*seed);
+  *rng = new Random(*seed);
+}
+
+void Segeom::TestUtils::randomCoordinates(double* x, double* y, double* z,
+                                          Random* rng) {
+  *x = rng->nextDouble(-5000000, 5000000);
+  *y = rng->nextDouble(-5000000, 5000000);
+  *z = rng->nextDouble(-5000000, 5000000);
 }
 
 Segeom::TestUtils::Random::Random() : Random(time(0)) {}
