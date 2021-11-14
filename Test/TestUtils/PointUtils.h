@@ -6,7 +6,7 @@
 namespace Segeom {
 namespace TestUtils {
 /// <summary>
-/// Generates a new random point using a given random number generato'r.
+/// Generates a new random point using a given random number generator.
 /// </summary>
 Segeom::Primitives::Point<double> randPoint(Random *rng);
 }  // namespace TestUtils

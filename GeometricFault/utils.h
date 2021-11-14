@@ -4,6 +4,6 @@
 
 namespace Segeom {
 namespace Utils {
-const double DELTA = 1e-32;
+const double DELTA = 1e-9;
 }  // namespace Utils
 }  // namespace Segeom

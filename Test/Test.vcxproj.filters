@@ -41,6 +41,9 @@
     <ClInclude Include="TestUtils\PointUtils.h">
       <Filter>Header Files\TestUtils</Filter>
     </ClInclude>
+    <ClInclude Include="TestUtils\SegmentUtils.h">
+      <Filter>Header Files\TestUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

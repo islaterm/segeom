@@ -39,6 +39,7 @@
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TestUtils\CommonUtils.h" />
     <ClInclude Include="TestUtils\PointUtils.h" />
+    <ClInclude Include="TestUtils\SegmentUtils.h" />
     <ClInclude Include="VectorTest.h" />
   </ItemGroup>
   <ItemGroup>

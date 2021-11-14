@@ -139,12 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GeometricFault.cpp" />
     <ClCompile Include="Primitives\Point.cpp" />
+    <ClCompile Include="Primitives\Segment.cpp" />
     <ClCompile Include="Primitives\Vector.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Primitives\Point.h" />
+    <ClInclude Include="Primitives\Segment.h" />
     <ClInclude Include="Primitives\Vector.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>

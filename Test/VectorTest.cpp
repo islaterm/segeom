@@ -79,6 +79,7 @@ TEST_F(VectorTest, CommutativeAddition) {
   EXPECT_EQ(*testVector + v, v + *testVector);
 }
 
+// This test fails while comparing with a precision of 1e-10, passes with 1e-9
 TEST_F(VectorTest, AssociativeAddition) {
   Primitives::Vector<double> v1 = Utils::randVector(rng);
   Primitives::Vector<double> v2 = Utils::randVector(rng);

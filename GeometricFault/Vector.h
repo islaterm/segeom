@@ -1,10 +1,9 @@
 #pragma once
 #include <math.h>
-
 #include <iostream>
 
-#include "../utils.h"
 #include "Point.h"
+#include "utils.h"
 
 using namespace Segeom::Utils;
 
@@ -16,7 +15,7 @@ namespace Primitives {
 /// </summary>
 template <class T>
 class Vector {
-#pragma region OPERATORS
+#pragma region OPERATIONS
   /// <summary>
   ///   Performs the addition of two vectors.
   /// </summary>
@@ -24,22 +23,12 @@ class Vector {
     lAddend += rAddend;
     return lAddend;
   }
-
   /// <summary>
   ///   Performs the subtraction of two vectors.
   /// </summary>
   friend Vector<T> operator-(Vector<T> minuend, const Vector<T>& subtrahend) {
     minuend -= subtrahend;
     return minuend;
-  }
-
-  /// <summary>
-  /// Returns an output stream that represents a vector.
-  /// </summary>
-  friend std::ostream& operator<<(std::ostream& os, const Vector<T>& vector) {
-    os << "Vector{x: " << vector.getX() << ", y: " << vector.getY()
-       << ", z: " << vector.getZ() << "}";
-    return os;
   }
 #pragma endregion
 
@@ -75,7 +64,7 @@ class Vector {
   /// <returns>The calculated product.</returns>
   inline Vector<T>* cross(const Vector<T>& v) const;
 
-#pragma region COMPOUND ASSIGNMENTS
+  #pragma region COMPOUND ASSIGNMENTS
   /// <summary>
   ///   Addition compound assignment for a vector.
   /// </summary>
@@ -116,8 +105,8 @@ inline bool operator!=(const Vector<T>& left, const Vector<T>& right) {
   return !(left.getHead() == right.getHead());
 }
 
-// template <class T>
-// inline std::ostream operator<<(std::ostream &stream, const Vector<T> &v) {
+//template <class T>
+//inline std::ostream operator<<(std::ostream &stream, const Vector<T> &v) {
 //  return stream << "Vector{x: " << v.getX() << ", y: " << v.getY()
 //              << ", z: " << v.getZ() << "}";
 //}

@@ -30,6 +30,12 @@
     <ClCompile Include="Primitives\Vector.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="Primitives\Segment.cpp">
+      <Filter>Source Files\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometricFault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -39,6 +45,9 @@
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="Primitives\Vector.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives\Segment.h">
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
   </ItemGroup>

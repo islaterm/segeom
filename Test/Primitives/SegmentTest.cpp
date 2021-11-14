@@ -17,7 +17,10 @@ class SegmentTest : public ::testing::Test {
 };
 
 void SegmentTest::SetUp() {
-  Utils::initRandom(&seed, &rng);/*
+  Utils::initRandom(&seed, &rng);
+  testPoint1 = &Utils::randPoint(rng);
+  testPoint2 = &Utils::randPoint(rng);
+  /*
   this->x = rng->nextDouble(-5000000, 5000000);
   this->y = rng->nextDouble(-5000000, 5000000);
   this->z = rng->nextDouble(-5000000, 5000000);
