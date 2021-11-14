@@ -1,5 +1,5 @@
-#include "../Testing.h"
 #include "../TestUtils/SegmentUtils.h"
+#include "../Testing.h"
 
 namespace Utils = Segeom::TestUtils;
 
@@ -20,6 +20,7 @@ void SegmentTest::SetUp() {
   Utils::initRandom(&seed, &rng);
   testPoint1 = &Utils::randPoint(rng);
   testPoint2 = &Utils::randPoint(rng);
+  testSegment = new Segeom::Primitives::Segment<double>(testPoint1, testPoint2);
   /*
   this->x = rng->nextDouble(-5000000, 5000000);
   this->y = rng->nextDouble(-5000000, 5000000);

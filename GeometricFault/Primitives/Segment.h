@@ -1,4 +1,6 @@
 #pragma once
+#include "Point.h"
+
 namespace Segeom {
 namespace Primitives {
 /// <summary>
@@ -12,7 +14,10 @@ namespace Primitives {
 /// </typeparam>
 template <class T>
 class Segment {
-  
+  /// <summary>
+  /// Creates a new segment that goes from <c>start</c> to <c>end</c>.
+  /// </summary>
+  Segment(Point<T>* start, Point<T>* end);
 };
 }  // namespace Primitives
 }  // namespace Segeom
