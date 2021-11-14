@@ -14,10 +14,21 @@ namespace Primitives {
 /// </typeparam>
 template <class T>
 class Segment {
+ public:
   /// <summary>
   /// Creates a new segment that goes from <c>start</c> to <c>end</c>.
   /// </summary>
-  Segment(Point<T>* start, Point<T>* end);
+  Segment(Point<T>* start, Point<T>* end) : startPoint(start), endPoint(end) {}
+  ~Segment();
+
+ private:
+  Point<T>* startPoint;
+  Point<T>* endPoint;
 };
+template <class T>
+inline Segment<T>::~Segment() {
+  delete startPoint;
+  delete endPoint;
+}
 }  // namespace Primitives
 }  // namespace Segeom

@@ -19,7 +19,7 @@ void Segeom::TestUtils::randomCoordinates(double* x, double* y, double* z,
   *z = rng->nextDouble(-5000000, 5000000);
 }
 
-Segeom::TestUtils::Random::Random() : Random(time(0)) {}
+Segeom::TestUtils::Random::Random() : Random((long)time(0)) {}
 
 Segeom::TestUtils::Random::Random(long seed) {
   this->seed = seed;

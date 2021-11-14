@@ -50,13 +50,13 @@ TEST_F(VectorTest, NormalizationTest) {
 
 TEST_F(VectorTest, MagnitudeTest) {
   double expectedMagnitude = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-  EXPECT_DOUBLE_EQ(expectedMagnitude, testVector->magnitude(), utils::DELTA);
+  EXPECT_DOUBLE_EQ(expectedMagnitude, testVector->magnitude());
 }
 
 TEST_F(VectorTest, DotProductTest) {
   Primitives::Vector<double> v = Utils::randVector();
   double expected = x * v.getX() + y * v.getY() + z * v.getZ();
-  EXPECT_DOUBLE_EQ(expected, testVector->dot(v), utils::DELTA);
+  EXPECT_DOUBLE_EQ(expected, testVector->dot(v));
 }
 
 TEST_F(VectorTest, CrossProductTest) {

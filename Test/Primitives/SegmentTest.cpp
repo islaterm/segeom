@@ -21,12 +21,14 @@ void SegmentTest::SetUp() {
   testPoint1 = &Utils::randPoint(rng);
   testPoint2 = &Utils::randPoint(rng);
   testSegment = new Segeom::Primitives::Segment<double>(testPoint1, testPoint2);
-  /*
-  this->x = rng->nextDouble(-5000000, 5000000);
-  this->y = rng->nextDouble(-5000000, 5000000);
-  this->z = rng->nextDouble(-5000000, 5000000);
-  this->testVector = new Primitives::Vector<double>(x, y, z);
-  this->zeroVector = new Primitives::Vector<double>(0, 0, 0);*/
 }
 
 void SegmentTest::TearDown() { notifyOnFailure(seed); }
+
+/// <summary>
+/// Two segments are equal if the start and end points are equal.
+/// </summary>
+TEST_F(SegmentTest, Equality) {
+  Segeom::Primitives::Segment<double> expected(testPoint1, testPoint2);
+  EXPECT_EQ(expected, *testSegment);
+}

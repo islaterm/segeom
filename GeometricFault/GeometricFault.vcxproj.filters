@@ -30,11 +30,11 @@
     <ClCompile Include="Primitives\Vector.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="Primitives\Segment.cpp">
-      <Filter>Source Files\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="GeometricFault.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitives\Segment.cpp">
+      <Filter>Source Files\Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
