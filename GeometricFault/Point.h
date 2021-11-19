@@ -1,7 +1,9 @@
 #pragma once
-#include "../mathUtils.h"
+#include <math.h>
 
-//namespace utils = Segeom::Utils;
+#include "utils.h"
+
+namespace utils = Segeom::Utils;
 
 namespace Segeom {
 namespace Primitives {
@@ -78,7 +80,7 @@ class Point {
   T getZ() const;
 #pragma endregion
 
- protected:
+ private:
   T _x;
   T _y;
   T _z;
@@ -103,9 +105,9 @@ inline T Point<T>::getZ() const {
 
 template <class T>
 inline bool operator==(const Point<T>& left, const Point<T>& right) {
-  return abs(left.getX() - right.getX()) < Segeom::Utils::DELTA &&
-         abs(left.getY() - right.getY()) < Segeom::Utils::DELTA &&
-         abs(left.getZ() - right.getZ()) < Segeom::Utils::DELTA;
+  return abs(left.getX() - right.getX()) < utils::DELTA &&
+         abs(left.getY() - right.getY()) < utils::DELTA &&
+         abs(left.getZ() - right.getZ()) < utils::DELTA;
 }
 
 template <class T>

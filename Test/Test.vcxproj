@@ -35,6 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\Windows Kits\10\Include\10.0.19041.0\ucrt\math.h" />
+    <ClInclude Include="Primitives\SegmentTest.h" />
     <ClInclude Include="Primitives\VectorUtils.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TestUtils\CommonUtils.h" />
@@ -50,6 +51,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Primitives\PointNDTest.cpp" />
     <ClCompile Include="Primitives\SegmentTest.cpp" />
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="TestUtils\CommonUtils.cpp" />

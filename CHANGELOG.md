@@ -4,5 +4,6 @@
 
 | Category      | Detail                               | Version | Status  |
 | ------------- | ------------------------------------ | ------- | ------- |
-| FEAT(segment) | Segment constructor/destructor       | 1.0.0.3 | WIP     |
+|FEAT(point) | n-ary point definition | 1.0.1.1 | WIP |
+| FEAT(segment) | Segment constructor/destructor       | 1.0.0.3 | DROPPED     |
 | FIX(segment)  | Modified point equality error margin | 1.0.0.1 | WORKING |

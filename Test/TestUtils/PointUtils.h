@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../GeometricFault/Primitives/PointND.h"
 #include "../../GeometricFault/Primitives/Point.h"
 #include "CommonUtils.h"
 

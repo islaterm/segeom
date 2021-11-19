@@ -4,6 +4,7 @@
 
 #include <ctime>
 #include <random>
+#include <vector>
 
 namespace Segeom {
 namespace TestUtils {
@@ -21,11 +22,23 @@ class Random {
   /// Returns a random double precision number between <c>lo</c> and <c>hi</c>.
   /// </summary>
   double nextDouble(double lo, double hi);
+
+  /// <summary>
+  /// Returns a random integer between <c>lo</c> and <c>hi</c> (inclusive).
+  /// </summary>
+  int nextInt(int lo, int hi);
+
   /// <summary>
   /// Returns a random non-zero double precision number between <c>lo</c> and
   /// <c>hi</c>.
   /// </summary>
   double nextNonZeroDouble(double lo, double hi);
+
+  /// <summary>
+  /// Generates a std::vector with random double values between lo and hi.
+  /// </summary>
+  void randDoubleStdVector(double lo, double hi, std::vector<double> *out);
+
   long getSeed();
 
  private:
@@ -44,5 +57,20 @@ void initRandom(long *seed, Random **rng);
 /// random number generator.
 /// </summary>
 void randomCoordinates(double *x, double *y, double *z, Random *rng);
+
+/// <summary>
+/// Translates a vector a random (non-zero) displacement.
+/// </summary>
+std::vector<double> translateStdVec(std::vector<double> &vector, Random &rng);
+
+/// <summary>
+/// Returns a subset of the elements of a std::vector from start to end.
+/// </summary>
+template <class T>
+std::vector<T>* sublist(std::vector<T> const &vector, int start, int end) {
+  auto first = vector.begin() + start;
+  auto last = vector.begin() + end + 1;
+  return new std::vector<T>(start, end);
+}
 }  // namespace TestUtils
 }  // namespace Segeom

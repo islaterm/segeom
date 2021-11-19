@@ -1,9 +1,11 @@
 #pragma once
-
+#include <math.h>
 #include <iostream>
 
 #include "Point.h"
+#include "utils.h"
 
+using namespace Segeom::Utils;
 
 namespace Segeom {
 namespace Primitives {
@@ -13,7 +15,7 @@ namespace Primitives {
 /// </summary>
 template <class T>
 class Vector {
-#pragma region OPERATORS
+#pragma region OPERATIONS
   /// <summary>
   ///   Performs the addition of two vectors.
   /// </summary>
@@ -21,22 +23,12 @@ class Vector {
     lAddend += rAddend;
     return lAddend;
   }
-
   /// <summary>
   ///   Performs the subtraction of two vectors.
   /// </summary>
   friend Vector<T> operator-(Vector<T> minuend, const Vector<T>& subtrahend) {
     minuend -= subtrahend;
     return minuend;
-  }
-
-  /// <summary>
-  /// Returns an output stream that represents a vector.
-  /// </summary>
-  friend std::ostream& operator<<(std::ostream& os, const Vector<T>& vector) {
-    os << "Vector{x: " << vector.getX() << ", y: " << vector.getY()
-       << ", z: " << vector.getZ() << "}";
-    return os;
   }
 #pragma endregion
 
@@ -58,7 +50,7 @@ class Vector {
   ///   This is equivalent to calculating the <i>length</> or <i>modulus</i> of
   ///   the vector.
   /// </summary>
-  double magnitude();
+  double magnitude() const;
 
   /// <summary>
   ///   Calculates and returns the <i>dot product</i> (or <i>inner product</i>)
@@ -72,7 +64,7 @@ class Vector {
   /// <returns>The calculated product.</returns>
   inline Vector<T>* cross(const Vector<T>& v) const;
 
-#pragma region COMPOUND ASSIGNMENTS
+  #pragma region COMPOUND ASSIGNMENTS
   /// <summary>
   ///   Addition compound assignment for a vector.
   /// </summary>
@@ -94,6 +86,12 @@ class Vector {
   inline double getZ() const { return head.getZ(); };
 
  private:
+  /// <summary>
+  ///   Squares a number <c>n</c>.
+  /// </summary>
+  /// <returns>The squared number.</returns>
+  double square(double n) const;
+
   Point<T> head;
 };
 
@@ -107,8 +105,8 @@ inline bool operator!=(const Vector<T>& left, const Vector<T>& right) {
   return !(left.getHead() == right.getHead());
 }
 
-// template <class T>
-// inline std::ostream operator<<(std::ostream &stream, const Vector<T> &v) {
+//template <class T>
+//inline std::ostream operator<<(std::ostream &stream, const Vector<T> &v) {
 //  return stream << "Vector{x: " << v.getX() << ", y: " << v.getY()
 //              << ", z: " << v.getZ() << "}";
 //}
@@ -121,8 +119,8 @@ inline Vector<double>* Vector<T>::normalized() {
 }
 
 template <class T>
-inline double Vector<T>::magnitude() {
-  return Utils::norm3D<double>(head.getX(), head.getY(), head.getZ());
+inline double Vector<T>::magnitude() const {
+  return sqrt(square(head.getX()) + square(head.getY()) + square(head.getZ()));
 }
 
 template <class T>
@@ -153,6 +151,10 @@ inline Vector<T>& Vector<T>::operator-=(const Vector<T>& subtrahend) {
 template <class T>
 inline Point<T> Vector<T>::getHead() const {
   return this->head;
+}
+template <class T>
+inline double Vector<T>::square(double n) const {
+  return pow(n, 2);
 }
 }  // namespace Primitives
 }  // namespace Segeom

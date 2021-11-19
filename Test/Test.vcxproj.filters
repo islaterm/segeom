@@ -23,6 +23,9 @@
     <ClCompile Include="TestUtils\PointUtils.cpp">
       <Filter>Source Files\TestUtils</Filter>
     </ClCompile>
+    <ClCompile Include="Primitives\PointNDTest.cpp">
+      <Filter>Source Files\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\Windows Kits\10\Include\10.0.19041.0\ucrt\math.h" />
@@ -44,6 +47,7 @@
     <ClInclude Include="TestUtils\SegmentUtils.h">
       <Filter>Header Files\TestUtils</Filter>
     </ClInclude>
+    <ClInclude Include="Primitives\SegmentTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
