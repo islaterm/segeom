@@ -28,6 +28,7 @@ void PointNDTest::SetUp() {
 
 void PointNDTest::TearDown() { notifyOnFailure(this->seed); }
 
+#pragma region EQUALITY
 /// <summary>
 /// Two points with the same coordinates are equal.
 /// </summary>
@@ -61,6 +62,21 @@ TEST_F(PointNDTest, Distinct) {
   PointND<double> unexpected(displacedVector);
   EXPECT_NE(unexpected, *this->testPoint);
 }
+#pragma endregion
+
+#pragma region ADDITION
+TEST_F(PointNDTest, IdentityAdditionTest) {
+  std::vector<double> zeroVec(this->testPoint->getSize(), 0);
+  PointND<double> zeroPoint(zeroVec);
+  EXPECT_EQ(zeroPoint + *testPoint, *testPoint);
+}
+#pragma endregion
+
+#pragma region UTILITY
+TEST_F(PointNDTest, Size) {
+  EXPECT_EQ(this->testCoordinates.size(), this->testPoint->getSize());
+}
+#pragma endregion
 //
 // TEST_F(PointTest, AdditionTest) {
 //  Point<double> other(rng->nextDouble(-5000000, 5000000),
