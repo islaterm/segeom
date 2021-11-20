@@ -1,0 +1,3 @@
+// the configured options and settings for Segeom
+#define Segeom_VERSION_MAJOR @Segeom_VERSION_MAJOR@
+#define Segeom_VERSION_MINOR @Segeom_VERSION_MINOR@
