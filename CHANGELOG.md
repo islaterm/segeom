@@ -4,6 +4,7 @@
 
 | Category      | Detail                               | Version | Status  |
 | ------------- | ------------------------------------ | ------- | ------- |
+| FEAT(common)  | bazel/gtest integration              | 1.0.2.2 | WORKING |
 | FEAT(repo)    | Bazel VSCode config                  | 1.0.2.1 | WORKING |
 | FEAT(point)   | n-ary point definition               | 1.0.1.1 | WIP     |
 | FEAT(segment) | Segment constructor/destructor       | 1.0.0.3 | DROPPED |
