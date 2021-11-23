@@ -32,6 +32,13 @@
       "program": "${workspaceFolder}/bazel-bin/main/${fileBasenameNoExtension}.exe",
       "cwd": "${workspaceRoot}/bazel-out/x64_windows-dbg/bin/main/${fileBasenameNoExtension}.exe.runfiles/",
       "request": "launch"
+    },
+    {
+      "name": "Debug test",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bazel-bin/test/PointNDTest",
+      "cwd": "${workspaceRoot}"
     }
   ]
 }

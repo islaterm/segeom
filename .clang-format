@@ -11,3 +11,6 @@ AlignAfterOpenBracket: Align
 AlwaysBreakTemplateDeclarations: Yes
 FixNamespaceComments: true
 NamespaceIndentation: All
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false 
