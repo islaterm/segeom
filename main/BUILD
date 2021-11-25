@@ -11,10 +11,12 @@ cc_library(
     srcs = [
         "Primitives/Point.cpp",
         "Primitives/PointND.cpp",
+        "Primitives/Point2D.cpp"
     ],
     hdrs = [
         "Primitives/Point.h",
         "Primitives/PointND.h",
+        "Primitives/Point2D.h"
     ],
     visibility = ["//test:__pkg__"],
     deps = ["utils"],
