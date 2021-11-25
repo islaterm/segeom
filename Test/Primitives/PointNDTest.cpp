@@ -18,12 +18,15 @@ public:
   double y = 0;
   PointND<double> *testPoint = nullptr;
   std::vector<double> testCoordinates;
+  PointND<double> *zeroPoint = nullptr;
 };
 
 void PointNDTest::SetUp() {
   Utils::initRandom(&seed, &rng);
   rng->randDoubleStdVector(-1000000, 1000000, &this->testCoordinates);
   this->testPoint = new PointND<double>(this->testCoordinates);
+  std::vector<double> zeroVec(this->testPoint->getSize(), 0);
+  zeroPoint = new PointND<double>(zeroVec);
 }
 
 void PointNDTest::TearDown() { notifyOnFailure(this->seed); }
@@ -63,11 +66,7 @@ TEST_F(PointNDTest, Distinct) {
 #pragma endregion
 
 #pragma region ADDITION
-TEST_F(PointNDTest, IdentityAdditionTest) {
-  std::vector<double> zeroVec(this->testPoint->getSize(), 0);
-  PointND<double> zeroPoint(zeroVec);
-  EXPECT_EQ(zeroPoint + *testPoint, *testPoint);
-}
+TEST_F(PointNDTest, IdentityAdditionTest) { EXPECT_EQ(*zeroPoint + *testPoint, *testPoint); }
 
 TEST_F(PointNDTest, CommutativeAddition) {
   std::vector<double> vec;
@@ -87,24 +86,42 @@ TEST_F(PointNDTest, AssociativeAddition) {
 }
 #pragma endregion
 
+#pragma region SUBTRACTION
+TEST_F(PointNDTest, IdentitySubtraction) { EXPECT_EQ(*testPoint, *testPoint - *zeroPoint); }
+
+TEST_F(PointNDTest, AdditiveInverse) {
+  std::vector<double> vec;
+  rng->randDoubleStdVector(-1000000, 1000000, &vec);
+  PointND<double> p(vec);
+  EXPECT_EQ(*zeroPoint, *testPoint - *testPoint);
+}
+#pragma endregion
+
 #pragma region UTILITY
 TEST_F(PointNDTest, Size) { EXPECT_EQ(this->testCoordinates.size(), this->testPoint->getSize()); }
 #pragma endregion
-//
 
-//
-// TEST_F(PointTest, SubtractionTest) {
-//  Point<double> other(rng->nextDouble(-5000000, 5000000),
-//                      rng->nextDouble(-5000000, 5000000));
-//  Point<double> expectedPoint(testPoint->getX() - other.getX(),
-//                              testPoint->getY() - other.getY());
-//  Point<double> actualPoint = *testPoint - other;
-//  EXPECT_EQ(expectedPoint, actualPoint);
-//}
-//
-// TEST_F(PointTest, MultiplicationTest) {
-//  Point<double> other(rng->nextDouble(-5000000, 5000000),
-//                      rng->nextDouble(-5000000, 5000000));
-//  double scalar = rng->nextDouble(-1000, 1000);
-//  Point<double> expectedPoint(testPoint->getX() * scalar,
-// testPoint->getY() * scal
+#pragma region MULTIPLICATION
+TEST_F(PointNDTest, IdentityMultiplication) { EXPECT_EQ(1 * *testPoint, *testPoint); }
+
+TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1 * *testPoint, *zeroPoint - *testPoint); }
+
+TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0, *zeroPoint); }
+
+TEST_F(PointNDTest, CommutativeMultiplication) {
+  double c = rng->nextDouble(-1000000, 1000000);
+  EXPECT_EQ(*this->testPoint * c, c * *this->testPoint);
+}
+
+TEST_F(PointNDTest, AssociativeMultiplication) {
+  double c = rng->nextDouble(-1000000, 1000000);
+  double d = rng->nextDouble(-1000000, 1000000);
+  EXPECT_EQ((*this->testPoint * c) * d, *this->testPoint * (c * d));
+}
+
+TEST_F(PointNDTest, DistributiveMultiplication) {
+  double c = rng->nextDouble(-1000000, 1000000);
+  double d = rng->nextDouble(-1000000, 1000000);
+  EXPECT_EQ(*this->testPoint * (c + d), (*this->testPoint * c) + (*this->testPoint * d));
+}
+#pragma endregion

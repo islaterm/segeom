@@ -7,9 +7,18 @@
 
 namespace Segeom {
   namespace Primitives {
+    /**
+     * @brief An n-dimensional point.
+     *
+     * @tparam T
+     *    A numerical data type; behaviour for non -arithmetic types is undefined.
+     */
+    template <class T>
+    class PointND;
+
     template <class T>
     class PointND {
-#pragma region OPERATIONS
+#pragma region OPERATORS
       /// <summary>
       /// Two points are equal if they have the same size and elements.
       /// </summary>
@@ -51,11 +60,37 @@ namespace Segeom {
         lAddend += rAddend;
         return lAddend;
       }
+
+      /**
+       * @brief Performs the subtraction of two points.
+       */
+      friend PointND<T> operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
+        minuend -= subtrahend;
+        return minuend;
+      }
+
+      /**
+       * @brief Performs the multiplication of a point by a scalar.
+       */
+      friend PointND<T> operator*(PointND<T> multiplier, const T &scalar) {
+        multiplier *= scalar;
+        return multiplier;
+      }
+
+      /**
+       * @brief Performs the multiplication of a point by a scalar.
+       */
+      friend PointND<T> operator*(const T &scalar, PointND<T> multiplier) {
+        multiplier *= scalar;
+        return multiplier;
+      }
 #pragma endregion
 
     public:
+#pragma region CONSTRUCTORS
       PointND() : coordinates(std::vector<T>{}) {}
       PointND(std::vector<double> &elems) : coordinates(elems){};
+#pragma endregion
 
       /**
        * @brief Get the size of the object
@@ -67,32 +102,64 @@ namespace Segeom {
 
       std::vector<T> getCoordinates() const;
 
+#pragma region COMPOUND ASSIGNMENTS
       /**
        * @brief Addition compound assignment operator.
        */
       PointND<T> &operator+=(const PointND<T> &addend);
 
-    private:
+      /**
+       * @brief Subtraction compound assignment operator.
+       */
+      PointND<T> &operator-=(const PointND<T> &subtrahend);
+
+      /**
+       * @brief Multiplication compound assignment operator.
+       */
+      PointND<T> &operator*=(const T &scalar);
+#pragma endregion
+
+    protected:
       std::vector<T> coordinates;
     };
-
-    template <class T>
-    inline size_t PointND<T>::getSize() const {
-      return this->coordinates.size();
-    }
-
-    template <class T>
-    inline std::vector<T> PointND<T>::getCoordinates() const {
-      return this->coordinates;
-    }
-
-    template <class T>
-    PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
-      size_t length = this->coordinates.size();
-      for (size_t i = 0; i < length; i++) {
-        this->coordinates[i] += addend.coordinates[i];
-      }
-      return *this;
-    }
   } // namespace Primitives
 } // namespace Segeom
+
+using namespace Segeom::Primitives;
+
+template <class T>
+inline size_t PointND<T>::getSize() const {
+  return this->coordinates.size();
+}
+
+template <class T>
+inline std::vector<T> PointND<T>::getCoordinates() const {
+  return this->coordinates;
+}
+
+template <class T>
+PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
+  size_t length = this->coordinates.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates[i] += addend.coordinates[i];
+  }
+  return *this;
+}
+
+template <class T>
+PointND<T> &PointND<T>::operator-=(const PointND<T> &addend) {
+  size_t length = this->coordinates.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates[i] -= addend.coordinates[i];
+  }
+  return *this;
+}
+
+template <class T>
+PointND<T> &PointND<T>::operator*=(const T &scalar) {
+  size_t length = this->coordinates.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates[i] *= scalar;
+  }
+  return *this;
+}

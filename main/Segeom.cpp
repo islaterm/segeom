@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-  double x = Segeom::Utils::norm3D<double>(1, 2, 3);
+  std::cout << __cplusplus;
   return 0;
 }
 

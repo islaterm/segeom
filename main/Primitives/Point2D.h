@@ -1,13 +1,17 @@
 #pragma once
-#include "Point.h"
+#include "PointND.h"
 
 namespace Segeom {
 namespace Primitives {
 
-template <class T>
-class Point2D : public Point<T> {
-  //Point(T x, T y) : Point{x, y, 0} {};
-};
+/**
+ * @brief A 2 component point.
+ */
+// template <class T>
+// class Point2D : public PointND<T> {
+//   public:
+//     Point(T x, T y);
+// };
 
 }  // namespace Primitives
 }  // namespace Segeom
