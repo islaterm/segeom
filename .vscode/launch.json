@@ -24,6 +24,14 @@
       ],
       "preLaunchTask": "C/C++: g++ build active file",
       "miDebuggerPath": "/usr/bin/gdb"
+    },
+    {
+      "name": "Segeom::main",
+      "preLaunchTask": "Segeom::main Build Debug",
+      "type": "cppvsdbg",
+      "program": "${workspaceFolder}/bazel-bin/main/hello-world.exe",
+      "cwd": "${workspaceRoot}/bazel-out/x64_windows-dbg/bin/main/hello-world.exe.runfiles/__main__/",
+      "request": "launch"
     }
   ]
 }
