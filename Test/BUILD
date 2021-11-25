@@ -24,7 +24,7 @@ cc_library(
 cc_test(
     name = "testbacan",
     size = "small",
-    srcs = ["Primitives/PointNDTest.cpp"],
+    srcs = ["Primitives/point_test.cpp"],
     deps = [
         ":point-utils",
         ":testing",

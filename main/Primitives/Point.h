@@ -1,142 +1,308 @@
 #pragma once
-#include "../math_utils.h"
 
-// namespace utils = segeom::Utils;
+#include <iostream>
+#include <vector>
+
+#include "main/math_utils.h"
 
 namespace segeom {
   namespace primitives {
+    /**
+     * @brief An n-dimensional point.
+     *
+     * @tparam T
+     *    A numerical data type; behaviour for non -arithmetic types is undefined.
+     */
     template <class T>
-    class Point {
-#pragma region OPERATIONS
-      /// <summary>
-      ///   Performs the addition of two points.
-      /// </summary>
-      friend Point<T> operator+(Point<T> lAddend, const Point<T> &rAddend) {
-        lAddend += rAddend;
-        return lAddend;
-      }
+    class PointND;
 
-      /// <summary>
-      ///   Performs the subtraction of two points.
-      /// </summary>
-      friend Point<T> operator-(Point<T> minuend, const Point<T> &subtrahend) {
-        minuend -= subtrahend;
-        return minuend;
-      }
+    /**
+     * @brief Two points are equal if they have the same size and elements.
+     */
+    template <class T>
+    bool operator==(const PointND<T> &left, const PointND<T> &right);
 
-      /// <summary>
-      ///   Performs the multiplication of two points.
-      /// </summary>
-      friend Point<T> operator*(Point<T> multiplier, const T &multiplicand) {
-        multiplier *= multiplicand;
-        return multiplier;
-      }
-#pragma endregion
+    /**
+     * @brief Two points are different if they are not equal; amazing :0
+     */
+    template <class T>
+    bool operator!=(const PointND<T> &left, const PointND<T> &right);
 
+    /**
+     * @brief Sends this point to standard output stream.
+     */
+    template <class T>
+    std::ostream &operator<<(std::ostream &os, const PointND<T> &point);
+
+    /**
+     * @brief Performs the addition of two points.
+     */
+    template <class T>
+    PointND<T> operator+(PointND<T> lAddend, const PointND<T> &rAddend);
+
+    /**
+     * @brief Performs the subtraction of two points.
+     */
+    template <class T>
+    PointND<T> operator-(PointND<T> minuend, const PointND<T> &subtrahend);
+
+    /**
+     * @brief Performs the multiplication of a point by a scalar.
+     */
+    template <class T>
+    PointND<T> operator*(PointND<T> multiplier, const T &scalar);
+
+    /**
+     * @brief Performs the multiplication of a point by a scalar.
+     */
+    template <class T>
+    PointND<T> operator*(const T &scalar, PointND<T> multiplier);
+
+    template <class T>
+    class PointND {
     public:
-      /// <summary>
-      ///   Creates a new 2D point from two given coordinates.
-      /// </summary>
-      Point(T x, T y) : _x(x), _y(y), _z(0) {}
+      /**
+       * @brief Creates an empty point.
+       */
+      PointND() : coordinates_(std::vector<T>{}) {}
 
-      /// <summary>
-      ///   Creates a new 3D point from three given coordinates.
-      /// </summary>
-      Point(T x, T y, T z) : _x(x), _y(y), _z(z) {}
+      /**
+       * @brief Creates an n-dimensional point.
+       *
+       * @param elems
+       *    A vector with the coordinates of this point.
+       */
+      PointND(std::vector<double> &elems) : coordinates_(elems){};
 
-#pragma region COMPOUND ASSIGNMENTS
-      /// <summary>
-      ///   Addition compound assignment for a point.
-      /// </summary>
-      Point<T> &operator+=(const Point<T> &addend);
+      /**
+       * @brief Get the size of the point.
+       *        The size of a point is defined as the number of coordinates components (or
+       *        dimensions) of it.
+       *        For example, a point with three coordinates (x, y, z) has size 3.
+       */
+      size_t size() const;
 
-      /// <summary>
-      ///   Subtraction compound assignment for a point.
-      /// </summary>
-      Point<T> &operator-=(const Point<T> &addend);
+      std::vector<T> coordinates() const;
 
-      /// <summary>
-      ///   Multiplication compound assignment for a point.
-      /// </summary>
-      Point<T> &operator*=(const T &factor);
-#pragma endregion
+      /**
+       * @brief Addition compound assignment operator.
+       */
+      PointND<T> &operator+=(const PointND<T> &addend);
 
-#pragma region ACCESSORS
-      /// <summary>
-      ///   Returns the x coordinate of this point.
-      /// </summary>
-      T getX() const;
+      /**
+       * @brief Subtraction compound assignment operator.
+       */
+      PointND<T> &operator-=(const PointND<T> &subtrahend);
 
-      /// <summary>
-      ///   Returns the y coordinate of this point.
-      /// </summary>
-      T getY() const;
-
-      /// <summary>
-      ///   Returns the z coordinate of this point.
-      /// </summary>
-      T getZ() const;
-#pragma endregion
+      /**
+       * @brief Multiplication compound assignment operator.
+       */
+      PointND<T> &operator*=(const T &scalar);
 
     protected:
-      T _x;
-      T _y;
-      T _z;
+      std::vector<T> coordinates_;
+
+    private:
+      friend bool operator==<>(const PointND<T> &left, const PointND<T> &right);
+
+      friend inline bool operator!=<>(const PointND<T> &left, const PointND<T> &right);
+
+      friend std::ostream &operator<<<>(std::ostream &os, const PointND<T> &point);
+
+      friend PointND<T> operator+<>(PointND<T> lAddend, const PointND<T> &rAddend);
+
+      friend PointND<T> operator-<>(PointND<T> minuend, const PointND<T> &subtrahend);
+
+      friend PointND<T> operator*<>(PointND<T> multiplier, const T &scalar);
+
+      friend PointND<T> operator*<>(const T &scalar, PointND<T> multiplier);
     };
 
-#pragma region ACCESSORS
+    /**
+     * @brief An 3-dimensional point.
+     *
+     * @tparam T
+     *    A numerical data type; behaviour for non -arithmetic types is undefined.
+     */
     template <class T>
-    inline T Point<T>::getX() const {
-      return this->_x;
-    }
+    class Point3D : public PointND<T> {
+    public:
+      /**
+       * @brief Creates a new 3D point from three given coordinates.
+       */
+      Point3D(T x, T y, T z) : PointND{std::vector<T>{x, y, z}} {}
 
-    template <class T>
-    inline T Point<T>::getY() const {
-      return this->_y;
-    }
+      /**
+       * @brief Returns the x coordinate of this point.
+       */
+      T x() const;
 
-    template <class T>
-    inline T Point<T>::getZ() const {
-      return this->_z;
-    }
-#pragma endregion
+      /**
+       * @brief Returns the y coordinate of this point.
+       */
+      T y() const;
 
-    template <class T>
-    inline bool operator==(const Point<T> &left, const Point<T> &right) {
-      return abs(left.getX() - right.getX()) < segeom::Utils::DELTA &&
-             abs(left.getY() - right.getY()) < segeom::Utils::DELTA &&
-             abs(left.getZ() - right.getZ()) < segeom::Utils::DELTA;
-    }
+      /**
+       * @brief Returns the z coordinate of this point.
+       */
+      T z() const;
+    };
 
+    /**
+     * @brief An 3-dimensional point.
+     *
+     * @tparam T
+     *    A numerical data type; behaviour for non-arithmetic types is undefined.
+     */
     template <class T>
-    inline bool operator!=(const Point<T> &left, const Point<T> &right) {
-      return !(left == right);
-    }
+    class Point2D : public PointND<T> {
+    public:
+      /**
+       * @brief Creates a new 2D point from three given coordinates.
+       */
+      Point2D(T x, T y) : PointND{std::vector<T>{x, y}} {}
 
-#pragma region COMPOUND ASSIGNMENTS
-    template <class T>
-    Point<T> &Point<T>::operator+=(const Point<T> &addend) {
-      this->_x += addend._x;
-      this->_y += addend._y;
-      this->_z += addend._z;
-      return *this;
-    }
+      /**
+       * @brief Returns the x coordinate of this point.
+       */
+      T x() const;
 
-    template <class T>
-    inline Point<T> &Point<T>::operator-=(const Point<T> &subtrahend) {
-      this->_x -= subtrahend._x;
-      this->_y -= subtrahend._y;
-      this->_z -= subtrahend._z;
-      return *this;
-    }
-
-    template <class T>
-    inline Point<T> &Point<T>::operator*=(const T &factor) {
-      this->_x *= factor;
-      this->_y *= factor;
-      this->_z *= factor;
-      return *this;
-    }
-#pragma endregion
+      /**
+       * @brief Returns the y coordinate of this point.
+       */
+      T y() const;
+    };
   } // namespace primitives
 } // namespace segeom
+
+using namespace segeom::primitives;
+
+#pragma region POINT ND OPERATORS
+template <class T>
+bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
+  auto &lCoord = left.coordinates();
+  auto &rCoord = right.coordinates();
+  if (lCoord.size() != rCoord.size()) {
+    return false;
+  }
+  for (size_t i = 0; i < lCoord.size(); i++) {
+    if (abs(lCoord[i] - rCoord[i]) >= segeom::Utils::DELTA) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template <class T>
+bool segeom::primitives::operator!=(const PointND<T> &left, const PointND<T> &right) {
+  return !(left == right);
+}
+
+template <class T>
+std::ostream &segeom::primitives::operator<<(std::ostream &os, const PointND<T> &point) {
+  os << "Point {";
+  size_t length = point.coordinates().size();
+  for (size_t i = 0; i < length; i++) {
+    os << "x" << i << ": " << point.coordinates()[i];
+    if (i != length - 1) {
+      os << ", ";
+    }
+  }
+  os << "}";
+  return os;
+}
+
+template <class T>
+PointND<T> segeom::primitives::operator+(PointND<T> lAddend, const PointND<T> &rAddend) {
+  lAddend += rAddend;
+  return lAddend;
+}
+
+template <class T>
+PointND<T> segeom::primitives::operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
+  minuend -= subtrahend;
+  return minuend;
+}
+
+template <class T>
+PointND<T> segeom::primitives::operator*(PointND<T> multiplier, const T &scalar) {
+  multiplier *= scalar;
+  return multiplier;
+}
+
+template <class T>
+PointND<T> segeom::primitives::operator*(const T &scalar, PointND<T> multiplier) {
+  multiplier *= scalar;
+  return multiplier;
+}
+#pragma endregion
+
+#pragma region POINT ND ACCESSORS
+template <class T>
+inline size_t PointND<T>::size() const {
+  return this->coordinates_.size();
+}
+
+template <class T>
+inline std::vector<T> PointND<T>::coordinates() const {
+  return this->coordinates_;
+}
+#pragma endregion
+
+#pragma region POINT ND COMPOUND ASSIGNMENTS
+template <class T>
+PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
+  size_t length = this->coordinates_.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates_[i] += addend.coordinates_[i];
+  }
+  return *this;
+}
+
+template <class T>
+PointND<T> &PointND<T>::operator-=(const PointND<T> &addend) {
+  size_t length = this->coordinates_.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates_[i] -= addend.coordinates_[i];
+  }
+  return *this;
+}
+
+template <class T>
+PointND<T> &PointND<T>::operator*=(const T &scalar) {
+  size_t length = this->coordinates_.size();
+  for (size_t i = 0; i < length; i++) {
+    this->coordinates_[i] *= scalar;
+  }
+  return *this;
+}
+#pragma endregion
+
+#pragma region POINT3D ACCESSORS
+template <class T>
+inline T Point3D<T>::x() const {
+  return this->coordinates_[0];
+}
+
+template <class T>
+inline T Point3D<T>::y() const {
+  return this->coordinates_[1];
+}
+
+template <class T>
+inline T Point3D<T>::z() const {
+  return this->coordinates_[2];
+}
+#pragma endregion
+
+#pragma region POINT3D ACCESSORS
+template <class T>
+inline T Point2D<T>::x() const {
+  return this->coordinates_[0];
+}
+
+template <class T>
+inline T Point2D<T>::y() const {
+  return this->coordinates_[1];
+}
+#pragma endregion
