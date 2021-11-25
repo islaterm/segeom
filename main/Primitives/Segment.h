@@ -4,8 +4,8 @@
 #include "Point.h"
 #include "../mathUtils.h"
 
-namespace Segeom {
-namespace Primitives {
+namespace segeom {
+namespace primitives {
 /// <summary>
 /// A segment is defined as a line that connects two <see cref="Point"/>s.
 ///
@@ -43,7 +43,7 @@ class Segment {
   /// <summary>
   /// Creates a new segment that goes from <c>start</c> to <c>end</c>.
   /// </summary>
-  Segment(Point<T>* start, Point<T>* end) : startPoint(start), endPoint(end) {}
+  Segment(Point3D<T>* start, Point3D<T>* end) : startPoint(start), endPoint(end) {}
   ~Segment();
 
   /// <summary>
@@ -54,16 +54,16 @@ class Segment {
   /// <summary>
   /// Returns the starting point of the segment.
   /// </summary>
-  inline Point<T>* getStart() const;
+  inline Point3D<T>* getStart() const;
 
   /// <summary>
   /// Returns the end point of the segment.
   /// </summary>
-  inline Point<T>* getEnd() const;
+  inline Point3D<T>* getEnd() const;
 
  private:
-  Point<T>* startPoint;
-  Point<T>* endPoint;
+  Point3D<T>* startPoint;
+  Point3D<T>* endPoint;
 };
 
 template <class T>
@@ -74,19 +74,19 @@ inline Segment<T>::~Segment() {
 
 template <class T>
 inline double Segment<T>::length() const {
-   return Segeom::Utils::norm3D(endPoint->getX() - startPoint->getX(),
-                                       endPoint->getY() - startPoint->getY(),
-                                       endPoint->getZ() - startPoint->getZ());
+   return segeom::Utils::norm3D(endPoint->x() - startPoint->x(),
+                                       endPoint->y() - startPoint->y(),
+                                       endPoint->z() - startPoint->z());
 }
 
 template <class T>
-inline Point<T>* Segment<T>::getStart() const {
+inline Point3D<T>* Segment<T>::getStart() const {
   return startPoint;
 }
 
 template <class T>
-inline Point<T>* Segment<T>::getEnd() const {
+inline Point3D<T>* Segment<T>::getEnd() const {
   return endPoint;
 }
-}  // namespace Primitives
-}  // namespace Segeom
+}  // namespace primitives
+}  // namespace segeom

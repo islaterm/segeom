@@ -6,7 +6,7 @@
 #include <random>
 #include <vector>
 
-namespace Segeom {
+namespace segeom {
 namespace TestUtils {
 /// <summary>
 /// Acceptable difference for floating point comparison.
