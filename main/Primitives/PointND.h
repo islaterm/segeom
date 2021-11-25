@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-#include "main/mathUtils.h"
+#include "main/math_utils.h"
 
 namespace segeom {
   namespace primitives {

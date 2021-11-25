@@ -1,5 +1,5 @@
 #pragma once
-#include "../mathUtils.h"
+#include "../math_utils.h"
 
 // namespace utils = segeom::Utils;
 
