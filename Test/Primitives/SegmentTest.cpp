@@ -34,7 +34,7 @@ void SegmentTest::SetUp() {
   testSegment = new Segment<double>(testPoint1, testPoint2);
 }
 
-void SegmentTest::TearDown() { notifyOnFailure(seed); }
+void SegmentTest::TearDown() { notify_on_failure(seed); }
 
 Point3D<double>* SegmentTest::translatePoint(Point3D<double>* originalPoint) {
   double x = testPoint1->x();

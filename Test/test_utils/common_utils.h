@@ -32,7 +32,7 @@ class Random {
   /// Returns a random non-zero double precision number between <c>lo</c> and
   /// <c>hi</c>.
   /// </summary>
-  double nextNonZeroDouble(double lo, double hi);
+  double next_non_zero_double(double lo, double hi);
 
   /// <summary>
   /// Generates a std::vector with random double values between lo and hi.

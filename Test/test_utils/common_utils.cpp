@@ -28,7 +28,7 @@ std::vector<double> segeom::test_utils::translateStdVec(
   for (size_t i = 0; i < vector.size(); i++) {
     double displacement;
     if (i == vector.size() - 1 && !isTranslated) {
-      displacement = rng.nextNonZeroDouble(-1000000, 1000000);
+      displacement = rng.next_non_zero_double(-1000000, 1000000);
     } else {
       displacement = rng.nextDouble(-1000000, 1000000);
       isTranslated = displacement != 0;
@@ -57,7 +57,7 @@ int Random::nextInt(int lo, int hi) {
   return dist(*rng);
 }
 
-double Random::nextNonZeroDouble(double lo, double hi) {
+double Random::next_non_zero_double(double lo, double hi) {
   while (true) {
     double r = nextDouble(lo, hi);
     if (std::abs(r) >= DELTA) {

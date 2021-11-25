@@ -2,7 +2,7 @@
 #include "test/testing.h"
 #include "gtest/gtest.h"
 
-namespace Utils = segeom::test_utils;
+namespace utils = segeom::test_utils;
 using namespace segeom::primitives;
 
 class PointNDTest : public ::testing::Test {
@@ -12,7 +12,7 @@ protected:
 
 public:
   long seed = 0;
-  Utils::Random *rng = nullptr;
+  utils::Random *rng = nullptr;
   double x = 0;
   double y = 0;
   PointND<double> *testPoint = nullptr;
@@ -21,14 +21,14 @@ public:
 };
 
 void PointNDTest::SetUp() {
-  Utils::initRandom(&seed, &rng);
+  utils::initRandom(&seed, &rng);
   rng->randDoubleStdVector(-1000000, 1000000, &this->testCoordinates);
   this->testPoint = new PointND<double>(this->testCoordinates);
   std::vector<double> zeroVec(this->testPoint->size(), 0);
   zeroPoint = new PointND<double>(zeroVec);
 }
 
-void PointNDTest::TearDown() { notifyOnFailure(this->seed); }
+void PointNDTest::TearDown() { notify_on_failure(this->seed); }
 
 #pragma region EQUALITY
 /// <summary>
@@ -50,7 +50,7 @@ TEST_F(PointNDTest, DifferentDimensions) {
   EXPECT_NE(PointND<double>{unexpected}, *testPoint);
 
   int length = rng->nextInt(0, this->testCoordinates.size());
-  std::vector<double> sublist = *Utils::sublist(this->testCoordinates, 0, length);
+  std::vector<double> sublist = *utils::sublist(this->testCoordinates, 0, length);
   EXPECT_NE(PointND<double>{sublist}, *this->testPoint);
 }
 
@@ -58,7 +58,7 @@ TEST_F(PointNDTest, DifferentDimensions) {
 /// Points with different elements but same length are different.
 /// </summary>
 TEST_F(PointNDTest, Distinct) {
-  std::vector<double> displacedVector = Utils::translateStdVec(this->testCoordinates, *this->rng);
+  std::vector<double> displacedVector = utils::translateStdVec(this->testCoordinates, *this->rng);
   PointND<double> unexpected(displacedVector);
   EXPECT_NE(unexpected, *this->testPoint);
 }

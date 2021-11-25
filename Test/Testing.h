@@ -6,4 +6,4 @@
 
 #include "gtest/gtest.h"
 
-void notifyOnFailure(long seed);
+void notify_on_failure(long seed);
