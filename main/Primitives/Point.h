@@ -85,6 +85,11 @@ namespace segeom {
       std::vector<T> coordinates() const;
 
       /**
+       * @brief Creates a copy of this point.
+       */
+      PointND<T> &operator=(PointND<T> other);
+
+      /**
        * @brief Addition compound assignment operator.
        */
       PointND<T> &operator+=(const PointND<T> &addend);
@@ -178,6 +183,12 @@ namespace segeom {
 using namespace segeom::primitives;
 
 #pragma region POINT ND OPERATORS
+template <class T>
+PointND<T> &PointND<T>::operator=(PointND<T> other) {
+  std::swap(this->coordinates_, other.coordinates_);
+  return *this;
+}
+
 template <class T>
 bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
   auto &lCoord = left.coordinates();

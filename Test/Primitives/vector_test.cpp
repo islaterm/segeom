@@ -1,7 +1,7 @@
-#include "Testing.h"
-#include "Primitives/VectorUtils.h"
+#include "test/testing.h"
+#include "test/test_utils/vector_utils.h"
 
-namespace Utils = segeom::TestUtils;
+namespace Utils = segeom::test_utils;
 namespace primitives = segeom::primitives;
 
 class VectorTest : public ::testing::Test {
@@ -54,13 +54,13 @@ TEST_F(VectorTest, MagnitudeTest) {
 }
 
 TEST_F(VectorTest, DotProductTest) {
-  primitives::Vector<double> v = Utils::randVector();
+  primitives::Vector<double> v = Utils::rand_vector(this->rng);
   double expected = x * v.getX() + y * v.getY() + z * v.getZ();
   EXPECT_DOUBLE_EQ(expected, testVector->dot(v));
 }
 
 TEST_F(VectorTest, CrossProductTest) {
-  primitives::Vector<double> v = Utils::randVector();
+  primitives::Vector<double> v = Utils::rand_vector(this->rng);
   primitives::Vector<double> expected(
       testVector->getY() * v.getZ() - testVector->getZ() * v.getY(),
       testVector->getZ() * v.getX() - testVector->getX() * v.getZ(),
@@ -75,14 +75,14 @@ TEST_F(VectorTest, IdentityAdditionTest) {
 }
 
 TEST_F(VectorTest, CommutativeAddition) {
-  primitives::Vector<double> v = Utils::randVector();
+  primitives::Vector<double> v = Utils::rand_vector(this->rng);
   EXPECT_EQ(*testVector + v, v + *testVector);
 }
 
 // This test fails while comparing with a precision of 1e-10, passes with 1e-9
 TEST_F(VectorTest, AssociativeAddition) {
-  primitives::Vector<double> v1 = Utils::randVector(rng);
-  primitives::Vector<double> v2 = Utils::randVector(rng);
+  primitives::Vector<double> v1 = Utils::rand_vector(this->rng);
+  primitives::Vector<double> v2 = Utils::rand_vector(this->rng);
   EXPECT_EQ((*testVector + v1) + v2, *testVector + (v1 + v2));
 }
 #pragma endregion
@@ -93,7 +93,7 @@ TEST_F(VectorTest, IdentitySubtraction) {
 }
 
 TEST_F(VectorTest, AdditiveInverse) {
-  primitives::Vector<double> v = Utils::randVector();
+  primitives::Vector<double> v = Utils::rand_vector(this->rng);
   EXPECT_EQ(*zeroVector, *testVector - *testVector);
 }
 #pragma endregion

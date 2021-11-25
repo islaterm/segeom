@@ -1,9 +1,8 @@
-#include "main/Primitives/point.h"
-#include "test/TestUtils/PointUtils.h"
-#include "test/Testing.h"
+#include "test/test_utils/point_utils.h"
+#include "test/testing.h"
 #include "gtest/gtest.h"
 
-namespace Utils = segeom::TestUtils;
+namespace Utils = segeom::test_utils;
 using namespace segeom::primitives;
 
 class PointNDTest : public ::testing::Test {

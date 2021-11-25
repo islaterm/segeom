@@ -4,6 +4,7 @@
 
 | Category        | Detail                                                       | Version | Status  |
 | --------------- | ------------------------------------------------------------ | ------- | ------- |
+| feat(vector)    | Random vectors                                               | 1.0.3.1 | PASSING |
 | feat(point)     | 2D and 3D points                                             | 1.0.2.8 | PASSING |
 | refactor(point) | Renamed namespaces                                           | 1.0.2.7 | PASSING |
 | refactor(point) | Moved friends outside PointND declaration                    | 1.0.2.6 | PASSING |

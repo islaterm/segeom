@@ -9,7 +9,8 @@ cc_library(
 cc_library(
     name = "primitives",
     hdrs = [
-        "Primitives/point.h",
+        "primitives/point.h",
+        "primitives/vector.h",
     ],
     visibility = ["//test:__pkg__"],
     deps = ["utils"],
