@@ -2,7 +2,7 @@
 // there.
 //
 
-#include "mathUtils.h"
+#include "math_utils.h"
 #include <iostream>
 
 int main() {
