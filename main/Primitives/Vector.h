@@ -5,8 +5,8 @@
 #include "Point.h"
 
 
-namespace Segeom {
-namespace Primitives {
+namespace segeom {
+namespace primitives {
 /// <summary>
 ///   An euclidean vector, that is, an object that has a magnitude and a
 ///   direction.
@@ -154,5 +154,5 @@ template <class T>
 inline Point<T> Vector<T>::getHead() const {
   return this->head;
 }
-}  // namespace Primitives
-}  // namespace Segeom
+}  // namespace primitives
+}  // namespace segeom

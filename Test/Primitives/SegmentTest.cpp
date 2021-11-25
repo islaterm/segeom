@@ -4,8 +4,8 @@
 #include "../TestUtils/SegmentUtils.h"
 #include "../Testing.h"
 
-namespace Utils = Segeom::TestUtils;
-using namespace Segeom::Primitives;
+namespace Utils = segeom::TestUtils;
+using namespace segeom::primitives;
 
 class SegmentTest : public ::testing::Test {
  protected:

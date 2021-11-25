@@ -3,8 +3,8 @@
 #include "test/Testing.h"
 #include "gtest/gtest.h"
 
-namespace Utils = Segeom::TestUtils;
-using namespace Segeom::Primitives;
+namespace Utils = segeom::TestUtils;
+using namespace segeom::primitives;
 
 class PointNDTest : public ::testing::Test {
 protected:

@@ -4,8 +4,8 @@
 #include "Point.h"
 #include "../mathUtils.h"
 
-namespace Segeom {
-namespace Primitives {
+namespace segeom {
+namespace primitives {
 /// <summary>
 /// A segment is defined as a line that connects two <see cref="Point"/>s.
 ///
@@ -74,7 +74,7 @@ inline Segment<T>::~Segment() {
 
 template <class T>
 inline double Segment<T>::length() const {
-   return Segeom::Utils::norm3D(endPoint->getX() - startPoint->getX(),
+   return segeom::Utils::norm3D(endPoint->getX() - startPoint->getX(),
                                        endPoint->getY() - startPoint->getY(),
                                        endPoint->getZ() - startPoint->getZ());
 }
@@ -88,5 +88,5 @@ template <class T>
 inline Point<T>* Segment<T>::getEnd() const {
   return endPoint;
 }
-}  // namespace Primitives
-}  // namespace Segeom
+}  // namespace primitives
+}  // namespace segeom
