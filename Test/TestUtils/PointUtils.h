@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../GeometricFault/Primitives/PointND.h"
-#include "../../GeometricFault/Primitives/Point.h"
+#include "main/Primitives/PointND.h"
+#include "main/Primitives/Point.h"
 #include "CommonUtils.h"
 
 namespace Segeom {

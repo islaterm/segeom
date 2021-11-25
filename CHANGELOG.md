@@ -4,6 +4,7 @@
 
 | Category      | Detail                               | Version | Status  |
 | ------------- | ------------------------------------ | ------- | ------- |
+| FEAT(point)   | Point addition                       | 1.0.2.3 | PASSING |
 | FEAT(common)  | bazel/gtest integration              | 1.0.2.2 | WORKING |
 | FEAT(repo)    | Bazel VSCode config                  | 1.0.2.1 | WORKING |
 | FEAT(point)   | n-ary point definition               | 1.0.1.1 | WIP     |

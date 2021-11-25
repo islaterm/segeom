@@ -48,8 +48,8 @@ Random::Random(long seed) {
 Random::~Random() { delete rng; }
 
 double Random::nextDouble(double lo, double hi) {
-  std::uniform_real_distribution<double> dist;
-  return dist(*rng) * (hi - lo) + lo;
+  std::uniform_real_distribution<double> dist(lo, hi);
+  return dist(*rng);
 }
 
 int Random::nextInt(int lo, int hi) {
