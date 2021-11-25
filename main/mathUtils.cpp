@@ -1,6 +1,6 @@
 #include "mathUtils.h"
 
-namespace Segeom {
+namespace segeom {
 namespace Utils {
 }  // namespace Utils
-}  // namespace Segeom
+}  // namespace segeom

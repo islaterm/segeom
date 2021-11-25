@@ -1,8 +1,8 @@
 #pragma once
 #include "PointND.h"
 
-namespace Segeom {
-namespace Primitives {
+namespace segeom {
+namespace primitives {
 
 /**
  * @brief A 2 component point.
@@ -13,5 +13,5 @@ namespace Primitives {
 //     Point(T x, T y);
 // };
 
-}  // namespace Primitives
-}  // namespace Segeom
+}  // namespace primitives
+}  // namespace segeom

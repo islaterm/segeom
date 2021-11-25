@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace Segeom {
+namespace segeom {
   namespace Utils {
     const double DELTA = 1e-9;
 
@@ -24,4 +24,4 @@ namespace Segeom {
       return sqrt(square<T>(x) + square<T>(y) + square<T>(z));
     }
   } // namespace Utils
-} // namespace Segeom
+} // namespace segeom

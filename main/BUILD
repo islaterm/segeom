@@ -10,7 +10,6 @@ cc_library(
     name = "primitives",
     srcs = [
         "Primitives/Point.cpp",
-        "Primitives/PointND.cpp",
         "Primitives/Point2D.cpp"
     ],
     hdrs = [

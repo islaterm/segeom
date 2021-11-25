@@ -1,8 +1,8 @@
 #include "main/Primitives/PointND.h"
 #include <vector>
 
-namespace Segeom {
-  namespace Primitives {
+namespace segeom {
+  namespace primitives {
     /**
      * @brief This class represents a 3-dimensional point.
      *
@@ -20,5 +20,5 @@ namespace Segeom {
       Point3D(T x, T y, T z) : PointND{std::vector{x, y, z}} {};
       ~Point3D();
     };
-  } // namespace Primitives
-} // namespace Segeom
+  } // namespace primitives
+} // namespace segeom

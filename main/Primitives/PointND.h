@@ -3,10 +3,10 @@
 #include <iostream>
 #include <vector>
 
-#include "../mathUtils.h"
+#include "main/mathUtils.h"
 
-namespace Segeom {
-  namespace Primitives {
+namespace segeom {
+  namespace primitives {
     /**
      * @brief An n-dimensional point.
      *
@@ -117,20 +117,21 @@ namespace Segeom {
 
       friend PointND<T> operator*<>(const T &scalar, PointND<T> multiplier);
     };
-  } // namespace Primitives
-} // namespace Segeom
+  } // namespace primitives
+} // namespace segeom
 
-using namespace Segeom::Primitives;
+using namespace segeom::primitives;
 
+#pragma region OPERATORS
 template <class T>
-bool Segeom::Primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
+bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
   auto &lCoord = left.coordinates();
   auto &rCoord = right.coordinates();
   if (lCoord.size() != rCoord.size()) {
     return false;
   }
   for (size_t i = 0; i < lCoord.size(); i++) {
-    if (abs(lCoord[i] - rCoord[i]) >= Segeom::Utils::DELTA) {
+    if (abs(lCoord[i] - rCoord[i]) >= segeom::Utils::DELTA) {
       return false;
     }
   }
@@ -138,12 +139,12 @@ bool Segeom::Primitives::operator==(const PointND<T> &left, const PointND<T> &ri
 }
 
 template <class T>
-bool Segeom::Primitives::operator!=(const PointND<T> &left, const PointND<T> &right) {
+bool segeom::primitives::operator!=(const PointND<T> &left, const PointND<T> &right) {
   return !(left == right);
 }
 
 template <class T>
-std::ostream &Segeom::Primitives::operator<<(std::ostream &os, const PointND<T> &point) {
+std::ostream &segeom::primitives::operator<<(std::ostream &os, const PointND<T> &point) {
   os << "Point {";
   size_t length = point.coordinates().size();
   for (size_t i = 0; i < length; i++) {
@@ -157,29 +158,31 @@ std::ostream &Segeom::Primitives::operator<<(std::ostream &os, const PointND<T> 
 }
 
 template <class T>
-PointND<T> Segeom::Primitives::operator+(PointND<T> lAddend, const PointND<T> &rAddend) {
+PointND<T> segeom::primitives::operator+(PointND<T> lAddend, const PointND<T> &rAddend) {
   lAddend += rAddend;
   return lAddend;
 }
 
 template <class T>
-PointND<T> Segeom::Primitives::operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
+PointND<T> segeom::primitives::operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
   minuend -= subtrahend;
   return minuend;
 }
 
 template <class T>
-PointND<T> Segeom::Primitives::operator*(PointND<T> multiplier, const T &scalar) {
+PointND<T> segeom::primitives::operator*(PointND<T> multiplier, const T &scalar) {
   multiplier *= scalar;
   return multiplier;
 }
 
 template <class T>
-PointND<T> Segeom::Primitives::operator*(const T &scalar, PointND<T> multiplier) {
+PointND<T> segeom::primitives::operator*(const T &scalar, PointND<T> multiplier) {
   multiplier *= scalar;
   return multiplier;
 }
+#pragma endregion
 
+#pragma region ACCESSORS
 template <class T>
 inline size_t PointND<T>::size() const {
   return this->coordinates_.size();
@@ -189,7 +192,9 @@ template <class T>
 inline std::vector<T> PointND<T>::coordinates() const {
   return this->coordinates_;
 }
+#pragma endregion
 
+#pragma region COMPOUND ASSIGNMENTS
 template <class T>
 PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
   size_t length = this->coordinates_.size();
@@ -216,3 +221,4 @@ PointND<T> &PointND<T>::operator*=(const T &scalar) {
   }
   return *this;
 }
+#pragma endregion

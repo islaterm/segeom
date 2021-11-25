@@ -1,12 +1,12 @@
 #include "CommonUtils.h"
 
-using namespace Segeom::TestUtils;
+using namespace segeom::TestUtils;
 
-double Segeom::TestUtils::randDouble(double lo, double hi) {
+double segeom::TestUtils::randDouble(double lo, double hi) {
   return rand() * (hi - lo) + lo;
 }
 
-void Segeom::TestUtils::initRandom(long* seed, Random** rng) {
+void segeom::TestUtils::initRandom(long* seed, Random** rng) {
   std::random_device r;
   std::default_random_engine engine(r());
   std::uniform_int_distribution<int> intDist(-500000, 500000);
@@ -14,14 +14,14 @@ void Segeom::TestUtils::initRandom(long* seed, Random** rng) {
   *rng = new Random(*seed);
 }
 
-void Segeom::TestUtils::randomCoordinates(double* x, double* y, double* z,
+void segeom::TestUtils::randomCoordinates(double* x, double* y, double* z,
                                           Random* rng) {
   *x = rng->nextDouble(-5000000, 5000000);
   *y = rng->nextDouble(-5000000, 5000000);
   *z = rng->nextDouble(-5000000, 5000000);
 }
 
-std::vector<double> Segeom::TestUtils::translateStdVec(
+std::vector<double> segeom::TestUtils::translateStdVec(
     std::vector<double>& vector, Random& rng) {
   std::vector<double> translated;
   bool isTranslated = false;

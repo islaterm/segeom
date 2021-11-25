@@ -1,10 +1,10 @@
 #pragma once
 #include "../mathUtils.h"
 
-// namespace utils = Segeom::Utils;
+// namespace utils = segeom::Utils;
 
-namespace Segeom {
-  namespace Primitives {
+namespace segeom {
+  namespace primitives {
     template <class T>
     class Point {
 #pragma region OPERATIONS
@@ -103,9 +103,9 @@ namespace Segeom {
 
     template <class T>
     inline bool operator==(const Point<T> &left, const Point<T> &right) {
-      return abs(left.getX() - right.getX()) < Segeom::Utils::DELTA &&
-             abs(left.getY() - right.getY()) < Segeom::Utils::DELTA &&
-             abs(left.getZ() - right.getZ()) < Segeom::Utils::DELTA;
+      return abs(left.getX() - right.getX()) < segeom::Utils::DELTA &&
+             abs(left.getY() - right.getY()) < segeom::Utils::DELTA &&
+             abs(left.getZ() - right.getZ()) < segeom::Utils::DELTA;
     }
 
     template <class T>
@@ -138,5 +138,5 @@ namespace Segeom {
       return *this;
     }
 #pragma endregion
-  } // namespace Primitives
-} // namespace Segeom
+  } // namespace primitives
+} // namespace segeom
