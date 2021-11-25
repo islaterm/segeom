@@ -16,25 +16,22 @@ namespace Segeom {
     template <class T>
     class PointND;
 
+    /**
+     * @brief Two points are equal if they have the same size and elements.
+     */
+    template <class T>
+    bool operator==(const Segeom::Primitives::PointND<T> &left,
+                    const Segeom::Primitives::PointND<T> &right);
+  } // namespace Primitives
+} // namespace Segeom
+
+namespace Segeom {
+  namespace Primitives {
+
     template <class T>
     class PointND {
 #pragma region OPERATORS
-      /// <summary>
-      /// Two points are equal if they have the same size and elements.
-      /// </summary>
-      friend inline bool operator==(const PointND<T> &left, const PointND<T> &right) {
-        auto &lCoord = left.getCoordinates();
-        auto &rCoord = right.getCoordinates();
-        if (lCoord.size() != rCoord.size()) {
-          return false;
-        }
-        for (size_t i = 0; i < lCoord.size(); i++) {
-          if (abs(lCoord[i] - rCoord[i]) >= Segeom::Utils::DELTA) {
-            return false;
-          }
-        }
-        return true;
-      }
+      friend bool operator==<>(const PointND<T> &left, const PointND<T> &right);
 
       friend inline bool operator!=(const PointND<T> &left, const PointND<T> &right) {
         return !(left == right);
@@ -126,7 +123,20 @@ namespace Segeom {
 } // namespace Segeom
 
 using namespace Segeom::Primitives;
-
+template <class T>
+bool Segeom::Primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
+  auto &lCoord = left.getCoordinates();
+  auto &rCoord = right.getCoordinates();
+  if (lCoord.size() != rCoord.size()) {
+    return false;
+  }
+  for (size_t i = 0; i < lCoord.size(); i++) {
+    if (abs(lCoord[i] - rCoord[i]) >= Segeom::Utils::DELTA) {
+      return false;
+    }
+  }
+  return true;
+}
 template <class T>
 inline size_t PointND<T>::getSize() const {
   return this->coordinates.size();
