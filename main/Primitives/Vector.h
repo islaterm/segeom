@@ -87,14 +87,14 @@ class Vector {
   /// <summary>
   ///   Returns the head of this vector.
   /// </summary>
-  inline Point<T> getHead() const;
+  inline Point3D<T> getHead() const;
 
-  inline double getX() const { return head.getX(); };
-  inline double getY() const { return head.getY(); };
-  inline double getZ() const { return head.getZ(); };
+  inline double getX() const { return head.x(); };
+  inline double getY() const { return head.y(); };
+  inline double getZ() const { return head.z(); };
 
  private:
-  Point<T> head;
+  Point3D<T> head;
 };
 
 template <class T>
@@ -115,20 +115,20 @@ inline bool operator!=(const Vector<T>& left, const Vector<T>& right) {
 
 template <class T>
 inline Vector<double>* Vector<T>::normalized() {
-  return new Vector<double>(head.getX() / this->magnitude(),
-                            head.getY() / this->magnitude(),
-                            head.getZ() / this->magnitude());
+  return new Vector<double>(head.x() / this->magnitude(),
+                            head.y() / this->magnitude(),
+                            head.z() / this->magnitude());
 }
 
 template <class T>
 inline double Vector<T>::magnitude() {
-  return Utils::norm3D<double>(head.getX(), head.getY(), head.getZ());
+  return Utils::norm3D<double>(head.x(), head.y(), head.z());
 }
 
 template <class T>
 inline double Vector<T>::dot(const Vector<T>& v) const {
-  return head.getX() * v.getHead().getX() + head.getY() * v.getHead().getY() +
-         head.getZ() * v.getHead().getZ();
+  return head.x() * v.getHead().x() + head.y() * v.getHead().y() +
+         head.z() * v.getHead().z();
 }
 
 template <class T>
@@ -151,7 +151,7 @@ inline Vector<T>& Vector<T>::operator-=(const Vector<T>& subtrahend) {
 }
 
 template <class T>
-inline Point<T> Vector<T>::getHead() const {
+inline Point3D<T> Vector<T>::getHead() const {
   return this->head;
 }
 }  // namespace primitives

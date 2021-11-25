@@ -15,8 +15,8 @@ class SegmentTest : public ::testing::Test {
  public:
   long seed = 0;
   Utils::Random* rng = nullptr;
-  Point<double>* testPoint1 = nullptr;
-  Point<double>* testPoint2 = nullptr;
+  Point3D<double>* testPoint1 = nullptr;
+  Point3D<double>* testPoint2 = nullptr;
   Segment<double>* testSegment = nullptr;
 
   /// <summary>
@@ -24,7 +24,7 @@ class SegmentTest : public ::testing::Test {
   /// </summary>
   /// <param name="originalSegment">The segment to be translated.</param>
   /// <returns>The translated segment.</returns>
-  Point<double>* translatePoint(Point<double>* originalSegment);
+  Point3D<double>* translatePoint(Point<double>* originalSegment);
 };
 
 void SegmentTest::SetUp() {
@@ -36,15 +36,15 @@ void SegmentTest::SetUp() {
 
 void SegmentTest::TearDown() { notifyOnFailure(seed); }
 
-Point<double>* SegmentTest::translatePoint(Point<double>* originalPoint) {
-  double x = testPoint1->getX();
-  double y = testPoint1->getY();
-  double z = testPoint1->getZ();
+Point3D<double>* SegmentTest::translatePoint(Point3D<double>* originalPoint) {
+  double x = testPoint1->x();
+  double y = testPoint1->y();
+  double z = testPoint1->z();
 
   double dx = rng->nextNonZeroDouble(-1000000, 1000000);
   double dy = rng->nextNonZeroDouble(-1000000, 1000000);
   double dz = rng->nextNonZeroDouble(-1000000, 1000000);
-  return new Point<double>(x + dx, y + dy, z + dz);
+  return new Point3D<double>(x + dx, y + dy, z + dz);
 }
 
 #pragma region EQUALITY
@@ -87,23 +87,23 @@ TEST_F(SegmentTest, DifferentOrientation) {
 /// obtained by translating the segment to (0, 0).
 /// </summary>
 TEST_F(SegmentTest, Length) {
-  Point<double>* testPoint1 = &Utils::randPoint(rng);
-  Point<double>* testPoint2 = &Utils::randPoint(rng);
+  Point3D<double>* testPoint1 = &Utils::randPoint(rng);
+  Point3D<double>* testPoint2 = &Utils::randPoint(rng);
   Segment<double>* testSegment = new Segment<double>(testPoint1, testPoint2);
   Vector<double>* v =
-      new Vector<double>(testPoint2->getX() - testPoint1->getX(),
-                         testPoint2->getY() - testPoint1->getY(),
-                         testPoint2->getZ() - testPoint1->getZ());
+      new Vector<double>(testPoint2->x() - testPoint1->x(),
+                         testPoint2->y() - testPoint1->y(),
+                         testPoint2->z() - testPoint1->z());
   EXPECT_EQ(v->magnitude(), testSegment->length());
 }
 #pragma endregion
 
 #pragma region SLOPE
 TEST_F(SegmentTest, Slope) {
-  Point<double>* newPoint = translatePoint(testPoint1);
+  Point3D<double>* newPoint = translatePoint(testPoint1);
   Segment<double>* newSegment = new Segment<double>(testPoint1, newPoint);
-  double expected = (newPoint->getY() - testPoint1->getY()) /
-                    (newPoint->getX() - testPoint1->getX());
+  double expected = (newPoint->y() - testPoint1->y()) /
+                    (newPoint->x() - testPoint1->x());
   //EXPECT_DOUBLE_EQ(expected, newSegment->slope());
 }
 

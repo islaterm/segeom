@@ -8,14 +8,8 @@ cc_library(
 
 cc_library(
     name = "primitives",
-    srcs = [
-        "Primitives/Point.cpp",
-        "Primitives/Point2D.cpp"
-    ],
     hdrs = [
-        "Primitives/Point.h",
-        "Primitives/PointND.h",
-        "Primitives/Point2D.h"
+        "Primitives/point.h",
     ],
     visibility = ["//test:__pkg__"],
     deps = ["utils"],

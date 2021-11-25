@@ -1,4 +1,4 @@
-#include "main/Primitives/Point3D.h"
+#include "main/Primitives/point.h"
 #include "test/TestUtils/PointUtils.h"
 #include "test/Testing.h"
 #include "gtest/gtest.h"
@@ -102,11 +102,11 @@ TEST_F(PointNDTest, Size) { EXPECT_EQ(this->testCoordinates.size(), this->testPo
 #pragma endregion
 
 #pragma region MULTIPLICATION
-TEST_F(PointNDTest, IdentityMultiplication) { EXPECT_EQ(1 * *testPoint, *testPoint); }
+TEST_F(PointNDTest, IdentityMultiplication) { EXPECT_EQ(1.0 * *testPoint, *testPoint); }
 
-TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1 * *testPoint, *zeroPoint - *testPoint); }
+TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1.0 * *testPoint, *zeroPoint - *testPoint); }
 
-TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0, *zeroPoint); }
+TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0.0, *zeroPoint); }
 
 TEST_F(PointNDTest, CommutativeMultiplication) {
   double c = rng->nextDouble(-1000000, 1000000);
