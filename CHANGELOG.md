@@ -4,6 +4,7 @@
 
 | Category        | Detail                                                       | Version | Status  |
 | --------------- | ------------------------------------------------------------ | ------- | ------- |
+| refactor(point) | Moved friends outside PointND declaration                    | 1.0.2.6 | PASSING |
 | Refactor(point) | Moved PointND == implementation outside of class declaration | 1.0.2.5 | PASSING |
 | REFACTOR(point) | Forward declaration of PointND                               | 1.0.2.4 | PASSING |
 | FEAT(point)     | Point addition                                               | 1.0.2.3 | PASSING |

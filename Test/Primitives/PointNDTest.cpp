@@ -25,7 +25,7 @@ void PointNDTest::SetUp() {
   Utils::initRandom(&seed, &rng);
   rng->randDoubleStdVector(-1000000, 1000000, &this->testCoordinates);
   this->testPoint = new PointND<double>(this->testCoordinates);
-  std::vector<double> zeroVec(this->testPoint->getSize(), 0);
+  std::vector<double> zeroVec(this->testPoint->size(), 0);
   zeroPoint = new PointND<double>(zeroVec);
 }
 
@@ -98,15 +98,15 @@ TEST_F(PointNDTest, AdditiveInverse) {
 #pragma endregion
 
 #pragma region UTILITY
-TEST_F(PointNDTest, Size) { EXPECT_EQ(this->testCoordinates.size(), this->testPoint->getSize()); }
+TEST_F(PointNDTest, Size) { EXPECT_EQ(this->testCoordinates.size(), this->testPoint->size()); }
 #pragma endregion
 
 #pragma region MULTIPLICATION
-TEST_F(PointNDTest, IdentityMultiplication) { EXPECT_EQ(1 * *testPoint, *testPoint); }
+TEST_F(PointNDTest, IdentityMultiplication) { EXPECT_EQ(1.0 * *testPoint, *testPoint); }
 
-TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1 * *testPoint, *zeroPoint - *testPoint); }
+TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1.0 * *testPoint, *zeroPoint - *testPoint); }
 
-TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0, *zeroPoint); }
+TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0.0, *zeroPoint); }
 
 TEST_F(PointNDTest, CommutativeMultiplication) {
   double c = rng->nextDouble(-1000000, 1000000);

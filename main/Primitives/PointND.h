@@ -20,86 +20,70 @@ namespace Segeom {
      * @brief Two points are equal if they have the same size and elements.
      */
     template <class T>
-    bool operator==(const Segeom::Primitives::PointND<T> &left,
-                    const Segeom::Primitives::PointND<T> &right);
-  } // namespace Primitives
-} // namespace Segeom
+    bool operator==(const PointND<T> &left, const PointND<T> &right);
 
-namespace Segeom {
-  namespace Primitives {
+    /**
+     * @brief Two points are different if they are not equal; amazing :0
+     */
+    template <class T>
+    bool operator!=(const PointND<T> &left, const PointND<T> &right);
+
+    /**
+     * @brief Sends this point to standard output stream.
+     */
+    template <class T>
+    std::ostream &operator<<(std::ostream &os, const PointND<T> &point);
+
+    /**
+     * @brief Performs the addition of two points.
+     */
+    template <class T>
+    PointND<T> operator+(PointND<T> lAddend, const PointND<T> &rAddend);
+
+    /**
+     * @brief Performs the subtraction of two points.
+     */
+    template <class T>
+    PointND<T> operator-(PointND<T> minuend, const PointND<T> &subtrahend);
+
+    /**
+     * @brief Performs the multiplication of a point by a scalar.
+     */
+    template <class T>
+    PointND<T> operator*(PointND<T> multiplier, const T &scalar);
+
+    /**
+     * @brief Performs the multiplication of a point by a scalar.
+     */
+    template <class T>
+    PointND<T> operator*(const T &scalar, PointND<T> multiplier);
 
     template <class T>
     class PointND {
-#pragma region OPERATORS
-      friend bool operator==<>(const PointND<T> &left, const PointND<T> &right);
-
-      friend inline bool operator!=(const PointND<T> &left, const PointND<T> &right) {
-        return !(left == right);
-      }
-
-      friend std::ostream &operator<<(std::ostream &os, const PointND<T> &point) {
-        os << "Point {";
-        size_t length = point.getCoordinates().size();
-        for (size_t i = 0; i < length; i++) {
-          os << "x" << i << ": " << point.getCoordinates()[i];
-          if (i != length - 1) {
-            os << ", ";
-          }
-        }
-        os << "}";
-        return os;
-      }
-
-      /// <summary>
-      ///   Performs the addition of two points.
-      /// </summary>
-      friend PointND<T> operator+(PointND<T> lAddend, const PointND<T> &rAddend) {
-        lAddend += rAddend;
-        return lAddend;
-      }
-
-      /**
-       * @brief Performs the subtraction of two points.
-       */
-      friend PointND<T> operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
-        minuend -= subtrahend;
-        return minuend;
-      }
-
-      /**
-       * @brief Performs the multiplication of a point by a scalar.
-       */
-      friend PointND<T> operator*(PointND<T> multiplier, const T &scalar) {
-        multiplier *= scalar;
-        return multiplier;
-      }
-
-      /**
-       * @brief Performs the multiplication of a point by a scalar.
-       */
-      friend PointND<T> operator*(const T &scalar, PointND<T> multiplier) {
-        multiplier *= scalar;
-        return multiplier;
-      }
-#pragma endregion
-
     public:
-#pragma region CONSTRUCTORS
-      PointND() : coordinates(std::vector<T>{}) {}
-      PointND(std::vector<double> &elems) : coordinates(elems){};
-#pragma endregion
+      /**
+       * @brief Creates an empty point.
+       */
+      PointND() : coordinates_(std::vector<T>{}) {}
 
       /**
-       * @brief Get the size of the object
-       * @details The Size of a point is defined as the number of coordinates components (or
-       *          dimensions) of it.
-       *          For example, a point with three coordinates (x, y, z) has size 3.
+       * @brief Creates an n-dimensional point.
+       *
+       * @param elems
+       *    A vector with the coordinates of this point.
        */
-      size_t getSize() const;
+      PointND(std::vector<double> &elems) : coordinates_(elems){};
 
-      std::vector<T> getCoordinates() const;
+      /**
+       * @brief Get the size of the point.
+       *        The size of a point is defined as the number of coordinates components (or
+       *        dimensions) of it.
+       *        For example, a point with three coordinates (x, y, z) has size 3.
+       */
+      size_t size() const;
 
-#pragma region COMPOUND ASSIGNMENTS
+      std::vector<T> coordinates() const;
+
       /**
        * @brief Addition compound assignment operator.
        */
@@ -114,19 +98,34 @@ namespace Segeom {
        * @brief Multiplication compound assignment operator.
        */
       PointND<T> &operator*=(const T &scalar);
-#pragma endregion
 
     protected:
-      std::vector<T> coordinates;
+      std::vector<T> coordinates_;
+
+    private:
+      friend bool operator==<>(const PointND<T> &left, const PointND<T> &right);
+
+      friend inline bool operator!=<>(const PointND<T> &left, const PointND<T> &right);
+
+      friend std::ostream &operator<<<>(std::ostream &os, const PointND<T> &point);
+
+      friend PointND<T> operator+<>(PointND<T> lAddend, const PointND<T> &rAddend);
+
+      friend PointND<T> operator-<>(PointND<T> minuend, const PointND<T> &subtrahend);
+
+      friend PointND<T> operator*<>(PointND<T> multiplier, const T &scalar);
+
+      friend PointND<T> operator*<>(const T &scalar, PointND<T> multiplier);
     };
   } // namespace Primitives
 } // namespace Segeom
 
 using namespace Segeom::Primitives;
+
 template <class T>
 bool Segeom::Primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
-  auto &lCoord = left.getCoordinates();
-  auto &rCoord = right.getCoordinates();
+  auto &lCoord = left.coordinates();
+  auto &rCoord = right.coordinates();
   if (lCoord.size() != rCoord.size()) {
     return false;
   }
@@ -137,39 +136,83 @@ bool Segeom::Primitives::operator==(const PointND<T> &left, const PointND<T> &ri
   }
   return true;
 }
+
 template <class T>
-inline size_t PointND<T>::getSize() const {
-  return this->coordinates.size();
+bool Segeom::Primitives::operator!=(const PointND<T> &left, const PointND<T> &right) {
+  return !(left == right);
 }
 
 template <class T>
-inline std::vector<T> PointND<T>::getCoordinates() const {
-  return this->coordinates;
+std::ostream &Segeom::Primitives::operator<<(std::ostream &os, const PointND<T> &point) {
+  os << "Point {";
+  size_t length = point.coordinates().size();
+  for (size_t i = 0; i < length; i++) {
+    os << "x" << i << ": " << point.coordinates()[i];
+    if (i != length - 1) {
+      os << ", ";
+    }
+  }
+  os << "}";
+  return os;
+}
+
+template <class T>
+PointND<T> Segeom::Primitives::operator+(PointND<T> lAddend, const PointND<T> &rAddend) {
+  lAddend += rAddend;
+  return lAddend;
+}
+
+template <class T>
+PointND<T> Segeom::Primitives::operator-(PointND<T> minuend, const PointND<T> &subtrahend) {
+  minuend -= subtrahend;
+  return minuend;
+}
+
+template <class T>
+PointND<T> Segeom::Primitives::operator*(PointND<T> multiplier, const T &scalar) {
+  multiplier *= scalar;
+  return multiplier;
+}
+
+template <class T>
+PointND<T> Segeom::Primitives::operator*(const T &scalar, PointND<T> multiplier) {
+  multiplier *= scalar;
+  return multiplier;
+}
+
+template <class T>
+inline size_t PointND<T>::size() const {
+  return this->coordinates_.size();
+}
+
+template <class T>
+inline std::vector<T> PointND<T>::coordinates() const {
+  return this->coordinates_;
 }
 
 template <class T>
 PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
-  size_t length = this->coordinates.size();
+  size_t length = this->coordinates_.size();
   for (size_t i = 0; i < length; i++) {
-    this->coordinates[i] += addend.coordinates[i];
+    this->coordinates_[i] += addend.coordinates_[i];
   }
   return *this;
 }
 
 template <class T>
 PointND<T> &PointND<T>::operator-=(const PointND<T> &addend) {
-  size_t length = this->coordinates.size();
+  size_t length = this->coordinates_.size();
   for (size_t i = 0; i < length; i++) {
-    this->coordinates[i] -= addend.coordinates[i];
+    this->coordinates_[i] -= addend.coordinates_[i];
   }
   return *this;
 }
 
 template <class T>
 PointND<T> &PointND<T>::operator*=(const T &scalar) {
-  size_t length = this->coordinates.size();
+  size_t length = this->coordinates_.size();
   for (size_t i = 0; i < length; i++) {
-    this->coordinates[i] *= scalar;
+    this->coordinates_[i] *= scalar;
   }
   return *this;
 }
