@@ -55,16 +55,16 @@ TEST_F(VectorTest, MagnitudeTest) {
 
 TEST_F(VectorTest, DotProductTest) {
   primitives::Vector<double> v = utils::rand_vector(this->rng);
-  double expected = x * v.getX() + y * v.getY() + z * v.getZ();
+  double expected = x * v.x() + y * v.y() + z * v.z();
   EXPECT_DOUBLE_EQ(expected, test_vector->dot(v));
 }
 
 TEST_F(VectorTest, CrossProductTest) {
   primitives::Vector<double> v = utils::rand_vector(this->rng);
   primitives::Vector<double> expected(
-      test_vector->getY() * v.getZ() - test_vector->getZ() * v.getY(),
-      test_vector->getZ() * v.getX() - test_vector->getX() * v.getZ(),
-      test_vector->getX() * v.getY() - test_vector->getY() * v.getX());
+      test_vector->y() * v.z() - test_vector->z() * v.y(),
+      test_vector->z() * v.x() - test_vector->x() * v.z(),
+      test_vector->x() * v.y() - test_vector->y() * v.x());
   primitives::Vector<double>* actual = test_vector->cross(v);
   EXPECT_EQ(expected, *actual);
 }

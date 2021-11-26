@@ -3,7 +3,7 @@
 #include <math.h>
 
 namespace segeom {
-  namespace Utils {
+  namespace utils {
     const double DELTA = 1e-9;
 
     /// <summary>

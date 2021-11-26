@@ -54,3 +54,25 @@ cc_test(
     ],
 )
 # endregion
+
+# region : VECTOR
+cc_library(
+    name = "segment-utils",
+    # srcs = ["test_utils/vector_utils.cc"],
+    hdrs = ["test_utils/segment_utils.h"],
+    deps = [
+        "point-utils",
+        "//main:primitives",
+    ],
+)
+
+cc_test(
+    name = "segment-test",
+    size = "small",
+    srcs = ["primitives/segment_test.cpp"],
+    deps = [
+        ":segment-utils",
+        ":testing",
+    ],
+)
+# endregion

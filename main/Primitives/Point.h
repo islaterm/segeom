@@ -197,7 +197,7 @@ bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &ri
     return false;
   }
   for (size_t i = 0; i < lCoord.size(); i++) {
-    if (abs(lCoord[i] - rCoord[i]) >= segeom::Utils::DELTA) {
+    if (abs(lCoord[i] - rCoord[i]) >= segeom::utils::DELTA) {
       return false;
     }
   }
