@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <limits>
 #include <vector>
 
 #include "main/math_utils.h"
@@ -72,7 +73,7 @@ namespace segeom {
        * @param elems
        *    A vector with the coordinates of this point.
        */
-      PointND(std::vector<double> &elems) : coordinates_(elems){};
+      PointND(std::vector<double> elems) : coordinates_(elems){};
 
       /**
        * @brief Get the size of the point.
@@ -135,7 +136,7 @@ namespace segeom {
       /**
        * @brief Creates a new 3D point from three given coordinates.
        */
-      Point3D(T x, T y, T z) : PointND{std::vector<T>{x, y, z}} {}
+      Point3D(T x, T y, T z) : PointND<T>{std::vector<T>{x, y, z}} {}
 
       /**
        * @brief Returns the x coordinate of this point.
@@ -165,7 +166,13 @@ namespace segeom {
       /**
        * @brief Creates a new 2D point from three given coordinates.
        */
-      Point2D(T x, T y) : PointND{std::vector<T>{x, y}} {}
+      Point2D(T x, T y) : PointND<T>{std::vector<T>{x, y}} {}
+
+      /**
+       * @brief Creates a new 2D point from an n-dimensional point (trims the point if it has more
+       *        than 2 coordinates).
+       */
+      Point2D(PointND<T> p) : PointND<T>{std::vector<T>{p.coordinates()[0], p.coordinates()[1]}} {}
 
       /**
        * @brief Returns the x coordinate of this point.
@@ -191,13 +198,17 @@ PointND<T> &PointND<T>::operator=(PointND<T> other) {
 
 template <class T>
 bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &right) {
-  auto &lCoord = left.coordinates();
-  auto &rCoord = right.coordinates();
+  auto lCoord = left.coordinates();
+  auto rCoord = right.coordinates();
   if (lCoord.size() != rCoord.size()) {
     return false;
   }
+  double epsilon = std::numeric_limits<double>::epsilon();
   for (size_t i = 0; i < lCoord.size(); i++) {
-    if (abs(lCoord[i] - rCoord[i]) >= segeom::utils::DELTA) {
+    double local_delta = abs(lCoord[i]) > 1 && abs(rCoord[i]) > 1
+                             ? 100 * std::min(abs(epsilon * lCoord[i]), abs(epsilon * rCoord[i]))
+                             : epsilon;
+    if (abs(lCoord[i] - rCoord[i]) >= local_delta) {
       return false;
     }
   }
@@ -263,10 +274,15 @@ inline std::vector<T> PointND<T>::coordinates() const {
 #pragma region POINT ND COMPOUND ASSIGNMENTS
 template <class T>
 PointND<T> &PointND<T>::operator+=(const PointND<T> &addend) {
-  size_t length = this->coordinates_.size();
-  for (size_t i = 0; i < length; i++) {
+  size_t shortest_length = std::min(this->size(), addend.size());
+  size_t i;
+  for (i = 0; i < shortest_length; i++) {
     this->coordinates_[i] += addend.coordinates_[i];
   }
+  while (this->size() < addend.size()) {
+    this->coordinates_.push_back(addend.coordinates_[i++]);
+  }
+
   return *this;
 }
 

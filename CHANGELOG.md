@@ -4,6 +4,7 @@
 
 | Category         | Detail                                                       | Version | Status  |
 | ---------------- | ------------------------------------------------------------ | ------- | ------- |
+| feat(point)      | Improved point comparison precision measurement              | 1.0.4.1 | WORKING |
 | refactor(vector) | Reorganized vector class                                     | 1.0.3.2 | PASSING |
 | feat(vector)     | Random vectors                                               | 1.0.3.1 | PASSING |
 | feat(point)      | 2D and 3D points                                             | 1.0.2.8 | PASSING |

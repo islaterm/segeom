@@ -67,7 +67,7 @@ double Random::next_non_zero_double(double lo, double hi) {
 }
 
 void Random::randDoubleStdVector(double lo, double hi, std::vector<double>* out) {
-  int length = this->nextInt(0, 5);
+  int length = this->nextInt(1, 5);
   std::vector<double> vector;
   for (int i = 0; i < length; i++) {
     vector.push_back(this->nextDouble(lo, hi));

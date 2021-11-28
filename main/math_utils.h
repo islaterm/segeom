@@ -4,7 +4,7 @@
 
 namespace segeom {
   namespace utils {
-    const double DELTA = 1e-9;
+    const double DELTA = 1e-6;
 
     /// <summary>
     /// Squares a number.

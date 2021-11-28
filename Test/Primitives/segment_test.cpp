@@ -17,18 +17,19 @@ public:
   Point2D<double> *test_point_2 = nullptr;
   Segment<double> *test_segment = nullptr;
 
-  /// <summary>
-  /// Moves a segment
-  /// </summary>
-  /// <param name="originalSegment">The segment to be translated.</param>
-  /// <returns>The translated segment.</returns>
+  /**
+   * @brief Moves a segment.
+   *
+   * @param originalSegment The segment to be translated.
+   * @return The translated segment.
+   */
   Point2D<double> *translatePoint(Point2D<double> *originalSegment);
 };
 
 void SegmentTest::SetUp() {
   utils::initRandom(&seed, &rng);
-  test_point_1 = &utils::rand_point_2d(rng);
-  test_point_2 = &utils::rand_point_2d(rng);
+  *test_point_1 = utils::rand_point_2d(rng);
+  *test_point_2 = utils::rand_point_2d(rng);
   test_segment = new Segment<double>(test_point_1, test_point_2);
 }
 
@@ -57,7 +58,8 @@ TEST_F(SegmentTest, Equality) {
 /// Two segments are different if the start and end points are different.
 /// </summary>
 TEST_F(SegmentTest, DifferentPoints) {
-  Segment<double> *unexpected = new Segment<double>(translatePoint(test_point_1), test_point_2);
+  Segment<decltype(1.0)> *unexpected =
+      new Segment<double>(translatePoint(test_point_1), test_point_2);
   EXPECT_NE(*unexpected, *test_segment);
 
   unexpected = new Segment<double>(test_point_1, translatePoint(test_point_2));
@@ -82,11 +84,11 @@ TEST_F(SegmentTest, DifferentOrientation) {
 /// obtained by translating the segment to (0, 0).
 /// </summary>
 TEST_F(SegmentTest, Length) {
-  Point2D<double> *testPoint1 = &utils::rand_point_2d(rng);
-  Point2D<double> *testPoint2 = &utils::rand_point_2d(rng);
-  Segment<double> *testSegment = new Segment<double>(testPoint1, testPoint2);
+  Point2D<double> testPoint1 = utils::rand_point_2d(rng);
+  Point2D<double> testPoint2 = utils::rand_point_2d(rng);
+  Segment<double> *testSegment = new Segment<double>(&testPoint1, &testPoint2);
   Vector<double> *v =
-      new Vector<double>(testPoint2->x() - testPoint1->x(), testPoint2->y() - testPoint1->y(), 0);
+      new Vector<double>(testPoint2.x() - testPoint1.x(), testPoint2.y() - testPoint1.y(), 0);
   EXPECT_EQ(v->magnitude(), testSegment->length());
 }
 #pragma endregion
@@ -96,10 +98,45 @@ TEST_F(SegmentTest, Slope) {
   Point2D<double> *newPoint = translatePoint(test_point_1);
   Segment<double> *newSegment = new Segment<double>(test_point_1, newPoint);
   double expected = (newPoint->y() - test_point_1->y()) / (newPoint->x() - test_point_1->x());
-  // EXPECT_DOUBLE_EQ(expected, newSegment->slope());
+  EXPECT_DOUBLE_EQ(expected, newSegment->slope());
 }
 
 TEST_F(SegmentTest, ZeroSlope) {
-  // Point2D<double> newPoint(testPoint1->getX() + rng->next_non_zero_double(), testPoint1->getY() )
+  Point2D<double> new_point(test_point_1->x() + rng->next_non_zero_double(-1000000, 1000000),
+                            test_point_1->y());
+  Segment<double> new_segment(test_point_1, &new_point);
+  EXPECT_DOUBLE_EQ(0, new_segment.slope());
+}
+
+TEST_F(SegmentTest, InfSlope) {
+  Point2D<double> new_point(test_point_1->x(),
+                            test_point_1->y() + rng->next_non_zero_double(-1000000, 1000000));
+  Segment<double> new_segment(test_point_1, &new_point);
+  EXPECT_TRUE(std::isinf(new_segment.slope()));
 }
 #pragma endregion
+
+#pragma region POINT DIRECTION
+TEST_F(SegmentTest, PointOnSegment) {
+  EXPECT_EQ(0, test_segment->direction_to(utils::rand_colinear_point(rng, *this->test_segment)));
+}
+
+TEST_F(SegmentTest, PointToTheRight) {
+  Point2D<double> aux = utils::rand_colinear_point(rng, *this->test_segment);
+  Point2D<double> new_point =
+      utils::rotate_point(&aux, *this->test_point_1, rng->nextDouble(1, 179));
+  EXPECT_EQ(1, test_segment->direction_to(new_point));
+}
+
+TEST_F(SegmentTest, PointToTheLeft) {
+  Point2D<double> aux = utils::rand_colinear_point(rng, *this->test_segment);
+  Point2D<double> new_point =
+      utils::rotate_point(&aux, *this->test_point_1, rng->nextDouble(-179, -1));
+  EXPECT_EQ(-1, test_segment->direction_to(new_point));
+}
+#pragma endregion
+
+int main(int argc, char** argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

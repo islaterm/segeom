@@ -58,7 +58,7 @@ cc_test(
 # region : VECTOR
 cc_library(
     name = "segment-utils",
-    # srcs = ["test_utils/vector_utils.cc"],
+    srcs = ["test_utils/segment_utils.cc"],
     hdrs = ["test_utils/segment_utils.h"],
     deps = [
         "point-utils",
@@ -73,6 +73,8 @@ cc_test(
     deps = [
         ":segment-utils",
         ":testing",
+        "@com_google_googletest//:gtest_main"
     ],
+    # args = ["--gtest_repeat=1000", "--gtest_break_on_failure"]
 )
 # endregion
