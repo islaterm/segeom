@@ -94,7 +94,11 @@ TEST_F(VectorTest, IdentitySubtraction) {
 
 TEST_F(VectorTest, AdditiveInverse) {
   primitives::Vector<double> v = utils::rand_vector(this->rng);
-  EXPECT_FALSE(true);
   EXPECT_EQ(*zero_vector, *test_vector - *test_vector);
 }
 #pragma endregion
+
+int main(int argc, char** argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

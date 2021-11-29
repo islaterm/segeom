@@ -4,6 +4,7 @@
 
 | Category         | Detail                                                       | Version | Status  |
 | ---------------- | ------------------------------------------------------------ | ------- | ------- |
+| feat(segment)    | Point direction                                              | 1.0.4.2 | FAILING |
 | feat(point)      | Improved point comparison precision measurement              | 1.0.4.1 | WORKING |
 | refactor(vector) | Reorganized vector class                                     | 1.0.3.2 | PASSING |
 | feat(vector)     | Random vectors                                               | 1.0.3.1 | PASSING |

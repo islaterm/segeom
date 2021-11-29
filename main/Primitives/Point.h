@@ -205,10 +205,7 @@ bool segeom::primitives::operator==(const PointND<T> &left, const PointND<T> &ri
   }
   double epsilon = std::numeric_limits<double>::epsilon();
   for (size_t i = 0; i < lCoord.size(); i++) {
-    double local_delta = abs(lCoord[i]) > 1 && abs(rCoord[i]) > 1
-                             ? 100 * std::min(abs(epsilon * lCoord[i]), abs(epsilon * rCoord[i]))
-                             : epsilon;
-    if (abs(lCoord[i] - rCoord[i]) >= local_delta) {
+    if (!utils::equals(lCoord[i], rCoord[i])) {
       return false;
     }
   }

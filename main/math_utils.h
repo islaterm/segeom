@@ -1,6 +1,8 @@
 #pragma once
 
+#include <limits>
 #include <math.h>
+#include <algorithm>
 
 namespace segeom {
   namespace utils {
@@ -23,5 +25,16 @@ namespace segeom {
     double norm3D(T x, T y, T z) {
       return sqrt(square<T>(x) + square<T>(y) + square<T>(z));
     }
-  } // namespace Utils
+
+    /**
+     * @brief Determines if 2 numbers are equal.
+     */
+    template <class T>
+    bool equals(T x, T y) {
+      double epsilon = std::numeric_limits<double>::epsilon();
+      double local_delta =
+          abs(x) > 1 && abs(y) > 1 ? 100 * std::min(abs(epsilon * x), abs(epsilon * y)) : epsilon;
+      return abs(x - y) < local_delta;
+    }
+  } // namespace utils
 } // namespace segeom
