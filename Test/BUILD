@@ -78,3 +78,28 @@ cc_test(
     # args = ["--gtest_repeat=1000", "--gtest_break_on_failure"]
 )
 # endregion
+
+# region : POLYGON
+cc_library(
+    name = "polygon-utils",
+    srcs = ["test_utils/polygon_utils.cc"],
+    hdrs = ["test_utils/polygon_utils.h"],
+    deps = [
+        "point-utils",
+        "segment-utils",
+        "//main:primitives",
+    ],
+)
+
+cc_test(
+    name = "polygon-test",
+    size = "small",
+    srcs = ["primitives/polygon_test.cc"],
+    deps = [
+        ":polygon-utils",
+        ":testing",
+        "@com_google_googletest//:gtest_main"
+    ],
+    # args = ["--gtest_repeat=1000", "--gtest_break_on_failure"]
+)
+# endregion

@@ -25,7 +25,7 @@ void PolygonTest::TearDown() { notify_on_failure(this->seed); }
  * @brief All polygons should have the same number of segments as vertices.
  */
 TEST_F(PolygonTest, NumberOfCornersMatchNumberOfSides) {
-  EXPECT_EQ(testPolygon->vertices()->length(), testPolygon->sides()->length);
+  EXPECT_EQ(testPolygon->vertices().size(), testPolygon.sides()->size());
 }
 
 int main(int argc, char **argv) {
