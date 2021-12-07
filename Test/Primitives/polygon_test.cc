@@ -16,7 +16,7 @@ public:
 
 void PolygonTest::SetUp() {
   test_utils::initRandom(&seed, &rng);
-  test_utils::make_random_polygon(rng);
+  testPolygon = test_utils::make_random_polygon(rng);
 }
 
 void PolygonTest::TearDown() { notify_on_failure(this->seed); }
@@ -25,7 +25,7 @@ void PolygonTest::TearDown() { notify_on_failure(this->seed); }
  * @brief All polygons should have the same number of segments as vertices.
  */
 TEST_F(PolygonTest, NumberOfCornersMatchNumberOfSides) {
-  EXPECT_EQ(testPolygon->vertices().size(), testPolygon.sides()->size());
+  EXPECT_EQ(testPolygon->vertices().size(), testPolygon->sides().size());
 }
 
 int main(int argc, char **argv) {

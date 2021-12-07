@@ -7,6 +7,6 @@ namespace segeom {
     /**
      * @brief Creates a new polygon with random points.
      */
-    segeom::primitives::Polygon<double> make_random_polygon(Random *rng);
+    segeom::primitives::Polygon<double> *make_random_polygon(Random *rng);
   } // namespace test_utils
 } // namespace segeom

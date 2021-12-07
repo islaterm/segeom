@@ -4,6 +4,7 @@
 
 | Category         | Detail                                                       | Version | Status  |
 | ---------------- | ------------------------------------------------------------ | ------- | ------- |
+| feat(polygon)    | Finished polygon constructor                                 | 1.0.5.3 | PASSING |
 | feat(polygon)    | Random polygon generator                                     | 1.0.5.2 | FAILING |
 | feat(polygon)    | Advances in polygon's basic tests                            | 1.0.5.1 | FAILING |
 | feat(segment)    | Point direction                                              | 1.0.4.2 | FAILING |
