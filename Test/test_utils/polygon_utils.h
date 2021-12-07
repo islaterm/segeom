@@ -5,13 +5,8 @@
 namespace segeom {
   namespace test_utils {
     /**
-     * @brief Creates a new polygon with random segments.
+     * @brief Creates a new polygon with random points.
      */
     segeom::primitives::Polygon<double> make_random_polygon(Random *rng);
-
-    /**
-     * @brief Creates a new segment with random coordinates.
-     */
-    segeom::primitives::Segment<double> make_random_segment(Random *rng);
   } // namespace test_utils
 } // namespace segeom
