@@ -11,7 +11,7 @@ protected:
 public:
   long seed = 0;
   test_utils::Random *rng = nullptr;
-  primitives::Polygon<double> *testPolygon = nullptr;
+  primitives::Polygon<int> *testPolygon = nullptr;
 };
 
 void PolygonTest::SetUp() {
@@ -26,6 +26,37 @@ void PolygonTest::TearDown() { notify_on_failure(this->seed); }
  */
 TEST_F(PolygonTest, NumberOfCornersMatchNumberOfSides) {
   EXPECT_EQ(testPolygon->vertices().size(), testPolygon->sides().size());
+}
+
+/**
+ * @brief An inverted copy of a polygon is the same polygon with contrary winding order.
+ */
+TEST_F(PolygonTest, InvertedPolygon) {
+  auto vertices = testPolygon->vertices();
+  auto inverted = testPolygon->inverted();
+  size_t size = vertices.size();
+  for (int i = size - 1; i >= 0; i--) {
+    EXPECT_EQ(vertices[i], inverted.vertices()[size - (i + 1)]);
+  }
+}
+
+/**
+ * @brief The area of two polygons with the same vertices and sides, but different winding order
+ *        should be equal in magnitude but contrary on sign.
+ */
+TEST_F(PolygonTest, InvertedOrientationArea) {
+  primitives::Polygon<int> inverted = testPolygon->inverted();
+  try {
+    auto expected_area = inverted.area();
+    auto actual_area = testPolygon->area();
+    if (expected_area == 0 || actual_area == 0)
+    {
+      FAIL() << "Polygon area should never be 0.";
+    }
+    EXPECT_EQ(expected_area, actual_area);
+  } catch (const GeometryException &e) {
+    EXPECT_EQ("Can't calculate area of malformed polygon", e.what());
+  }
 }
 
 int main(int argc, char **argv) {

@@ -26,7 +26,7 @@ namespace segeom {
       /// <summary>
       /// Returns a random integer between <c>lo</c> and <c>hi</c> (inclusive).
       /// </summary>
-      int nextInt(int lo, int hi);
+      int next_int(int lo, int hi);
 
       /**
        * @brief Returns a random non-zero double precision number between lo and hi.

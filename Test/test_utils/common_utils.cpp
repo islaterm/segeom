@@ -52,7 +52,7 @@ double Random::nextDouble(double lo, double hi) {
   return dist(*rng);
 }
 
-int Random::nextInt(int lo, int hi) {
+int Random::next_int(int lo, int hi) {
   std::uniform_int_distribution<int> dist(lo, hi);
   return dist(*rng);
 }
@@ -67,7 +67,7 @@ double Random::next_non_zero_double(double lo, double hi) {
 }
 
 void Random::randDoubleStdVector(double lo, double hi, std::vector<double>* out) {
-  int length = this->nextInt(1, 5);
+  int length = this->next_int(1, 5);
   std::vector<double> vector;
   for (int i = 0; i < length; i++) {
     vector.push_back(this->nextDouble(lo, hi));

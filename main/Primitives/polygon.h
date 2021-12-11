@@ -1,5 +1,8 @@
 #pragma once
 #include "segment.h"
+#include <algorithm>
+#include <exception>
+#include <vector>
 
 namespace segeom {
   namespace primitives {
@@ -30,6 +33,16 @@ namespace segeom {
       };
 
       /**
+       * @brief Returns a copy of this polygon with inverted winding order.
+       */
+      Polygon<T> inverted();
+
+      /**
+       * @brief Computes the area of this polygon.
+       */
+      T area() const;
+
+      /**
        * @brief Returns a vector containing the vertices of the polygon.
        */
       inline std::vector<Point2D<T>> vertices() const;
@@ -40,9 +53,34 @@ namespace segeom {
       inline std::vector<Segment<T>> sides() const;
     };
   } // namespace primitives
+
+  /**
+   * @brief An exception thrown when a geometric operation is not allowed or returned an invalid
+   *        result.
+   */
+  class GeometryException : public std::exception {
+  public:
+    GeometryException(const std::string &message) : message_(message){};
+    virtual const char *what() const throw();
+
+  private:
+    std::string message_;
+  };
 } // namespace segeom
 
 using namespace segeom::primitives;
+
+template <class T>
+Polygon<T> Polygon<T>::inverted() {
+  std::vector<Point2D<T>> rev = this->vertices_;
+  std::reverse(rev.begin(), rev.end());
+  return rev;
+}
+
+template <class T>
+T Polygon<T>::area() const {
+  return 0;
+}
 
 template <class T>
 inline std::vector<Point2D<T>> Polygon<T>::vertices() const {

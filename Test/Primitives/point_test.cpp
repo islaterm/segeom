@@ -49,7 +49,7 @@ TEST_F(PointNDTest, DifferentDimensions) {
   } while (unexpected.size() == this->testCoordinates.size());
   EXPECT_NE(PointND<double>{unexpected}, *testPoint);
 
-  int length = rng->nextInt(0, this->testCoordinates.size());
+  int length = rng->next_int(0, this->testCoordinates.size());
   std::vector<double> sublist = *utils::sublist(this->testCoordinates, 0, length);
   EXPECT_NE(PointND<double>{sublist}, *this->testPoint);
 }

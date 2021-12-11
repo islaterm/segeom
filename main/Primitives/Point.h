@@ -73,7 +73,7 @@ namespace segeom {
        * @param elems
        *    A vector with the coordinates of this point.
        */
-      PointND(std::vector<double> elems) : coordinates_(elems){};
+      PointND(std::vector<T> elems) : coordinates_(elems){};
 
       /**
        * @brief Get the size of the point.
