@@ -1,7 +1,7 @@
 #pragma once
+#include "main/exceptions.h"
 #include "segment.h"
 #include <algorithm>
-#include <exception>
 #include <vector>
 
 namespace segeom {
@@ -53,19 +53,6 @@ namespace segeom {
       inline std::vector<Segment<T>> sides() const;
     };
   } // namespace primitives
-
-  /**
-   * @brief An exception thrown when a geometric operation is not allowed or returned an invalid
-   *        result.
-   */
-  class GeometryException : public std::exception {
-  public:
-    GeometryException(const std::string &message) : message_(message){};
-    virtual const char *what() const throw();
-
-  private:
-    std::string message_;
-  };
 } // namespace segeom
 
 using namespace segeom::primitives;
@@ -79,7 +66,11 @@ Polygon<T> Polygon<T>::inverted() {
 
 template <class T>
 T Polygon<T>::area() const {
-  return 0;
+  T result = 0;
+  if (result == 0) {
+    throw segeom::GeometryException("Can't calculate area of malformed polygon");
+  }
+  return result;
 }
 
 template <class T>
