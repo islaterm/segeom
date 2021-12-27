@@ -4,7 +4,7 @@ using namespace segeom;
 
 primitives::Point2D<double> test_utils::rand_colinear_point(test_utils::Random *rng,
                                                             primitives::Segment<double> segment) {
-  double r = rng->nextDouble(0, 1);
+  double r = rng->next_double(0, 1);
   return (1 - r) * *segment.start() + r * *segment.end();
 }
 

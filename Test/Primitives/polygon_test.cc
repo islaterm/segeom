@@ -1,5 +1,6 @@
 #include "test/test_utils/polygon_utils.h"
 #include "test/testing.h"
+#include <string>
 
 using namespace segeom;
 
@@ -46,17 +47,9 @@ TEST_F(PolygonTest, InvertedPolygon) {
  */
 TEST_F(PolygonTest, InvertedOrientationArea) {
   primitives::Polygon<int> inverted = testPolygon->inverted();
-  try {
-    auto expected_area = inverted.area();
-    auto actual_area = testPolygon->area();
-    if (expected_area == 0 || actual_area == 0)
-    {
-      FAIL() << "Polygon area should never be 0.";
-    }
-    EXPECT_EQ(expected_area, actual_area);
-  } catch (const GeometryException &e) {
-    EXPECT_EQ("Can't calculate area of malformed polygon", e.what());
-  }
+  auto expected_area = inverted.area();
+  auto actual_area = testPolygon->area();
+  EXPECT_EQ(expected_area, actual_area);
 }
 
 int main(int argc, char **argv) {

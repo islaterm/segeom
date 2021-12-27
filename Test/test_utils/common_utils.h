@@ -18,13 +18,18 @@ namespace segeom {
       Random(long seed);
       ~Random();
 
-      /// <summary>
-      /// Returns a random double precision number between <c>lo</c> and <c>hi</c>.
-      /// </summary>
-      double nextDouble(double lo, double hi);
+      /**
+       * @brief Returns a random double precision number between `lo` and `hi`.
+       */
+      double next_double(double lo, double hi);
+
+      /**
+       * @brief Returns a double precision number between `lo` and `hi` with gaussian distribution
+       */
+      double next_double_gauss(double avg, double std_dev);
 
       /// <summary>
-      /// Returns a random integer between <c>lo</c> and <c>hi</c> (inclusive).
+      /// Returns a random integer between `lo` and `hi` (inclusive).
       /// </summary>
       int next_int(int lo, int hi);
 

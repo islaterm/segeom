@@ -40,7 +40,7 @@ namespace segeom {
       /**
        * @brief Computes the area of this polygon.
        */
-      T area() const;
+      double area() const;
 
       /**
        * @brief Returns a vector containing the vertices of the polygon.
@@ -65,12 +65,16 @@ Polygon<T> Polygon<T>::inverted() {
 }
 
 template <class T>
-T Polygon<T>::area() const {
-  T result = 0;
+double Polygon<T>::area() const {
+  double result = 0;
+  for (size_t i = 0; i < vertices_.size() - 1; i++) {
+    result += vertices_[i].x() * vertices_[i].x() - vertices_[i + 1].y() * vertices_[i + 1].x();
+  }
+
   if (result == 0) {
     throw segeom::GeometryException("Can't calculate area of malformed polygon");
   }
-  return result;
+  return result * 0.5;
 }
 
 template <class T>

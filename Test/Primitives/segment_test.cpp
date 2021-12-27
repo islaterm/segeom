@@ -127,14 +127,14 @@ TEST_F(SegmentTest, InfSlope) {
 // TEST_F(SegmentTest, PointToTheRight) {
 //   Point2D<double> aux = utils::rand_colinear_point(rng, *this->test_segment);
 //   Point2D<double> new_point =
-//       utils::rotate_point(&aux, *this->test_point_1, rng->nextDouble(10, 160));
+//       utils::rotate_point(&aux, *this->test_point_1, rng->next_double(10, 160));
 //   EXPECT_EQ(Segment<double>::Direction::kRight, test_segment->direction_to(new_point));
 // }
 
 // TEST_F(SegmentTest, PointToTheLeft) {
 //   Point2D<double> aux = utils::rand_colinear_point(rng, *this->test_segment);
 //   Point2D<double> new_point =
-//       utils::rotate_point(&aux, *this->test_point_1, rng->nextDouble(-160, -10));
+//       utils::rotate_point(&aux, *this->test_point_1, rng->next_double(-160, -10));
 //   EXPECT_EQ(Segment<double>::Direction::kLeft, test_segment->direction_to(new_point));
 // }
 #pragma endregion

@@ -108,19 +108,19 @@ TEST_F(PointNDTest, InverseMultiplication) { EXPECT_EQ(-1.0 * *testPoint, *zeroP
 TEST_F(PointNDTest, ZeroMultiplication) { EXPECT_EQ(*testPoint * 0.0, *zeroPoint); }
 
 TEST_F(PointNDTest, CommutativeMultiplication) {
-  double c = rng->nextDouble(-10000, 10000);
+  double c = rng->next_double(-10000, 10000);
   EXPECT_EQ(*this->testPoint * c, c * *this->testPoint);
 }
 
 TEST_F(PointNDTest, AssociativeMultiplication) {
-  double c = rng->nextDouble(-10000, 10000);
-  double d = rng->nextDouble(-10000, 10000);
+  double c = rng->next_double(-10000, 10000);
+  double d = rng->next_double(-10000, 10000);
   EXPECT_EQ((*this->testPoint * c) * d, *this->testPoint * (c * d));
 }
 
 TEST_F(PointNDTest, DistributiveMultiplication) {
-  double c = rng->nextDouble(-10000, 10000);
-  double d = rng->nextDouble(-10000, 10000);
+  double c = rng->next_double(-10000, 10000);
+  double d = rng->next_double(-10000, 10000);
   EXPECT_EQ(*this->testPoint * (c + d), (*this->testPoint * c) + (*this->testPoint * d));
 }
 #pragma endregion

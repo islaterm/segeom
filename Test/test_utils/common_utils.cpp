@@ -16,9 +16,9 @@ void segeom::test_utils::initRandom(long* seed, Random** rng) {
 
 void segeom::test_utils::randomCoordinates(double* x, double* y, double* z,
                                           Random* rng) {
-  *x = rng->nextDouble(-5000000, 5000000);
-  *y = rng->nextDouble(-5000000, 5000000);
-  *z = rng->nextDouble(-5000000, 5000000);
+  *x = rng->next_double(-5000000, 5000000);
+  *y = rng->next_double(-5000000, 5000000);
+  *z = rng->next_double(-5000000, 5000000);
 }
 
 std::vector<double> segeom::test_utils::translateStdVec(
@@ -30,7 +30,7 @@ std::vector<double> segeom::test_utils::translateStdVec(
     if (i == vector.size() - 1 && !isTranslated) {
       displacement = rng.next_non_zero_double(-1000000, 1000000);
     } else {
-      displacement = rng.nextDouble(-1000000, 1000000);
+      displacement = rng.next_double(-1000000, 1000000);
       isTranslated = displacement != 0;
     }
     translated.push_back(vector[i] + displacement);
@@ -47,7 +47,7 @@ Random::Random(long seed) {
 
 Random::~Random() { delete rng; }
 
-double Random::nextDouble(double lo, double hi) {
+double Random::next_double(double lo, double hi) {
   std::uniform_real_distribution<double> dist(lo, hi);
   return dist(*rng);
 }
@@ -59,7 +59,7 @@ int Random::next_int(int lo, int hi) {
 
 double Random::next_non_zero_double(double lo, double hi) {
   while (true) {
-    double r = nextDouble(lo, hi);
+    double r = next_double(lo, hi);
     if (std::abs(r) >= DELTA) {
       return r;
     }
@@ -70,9 +70,14 @@ void Random::randDoubleStdVector(double lo, double hi, std::vector<double>* out)
   int length = this->next_int(1, 5);
   std::vector<double> vector;
   for (int i = 0; i < length; i++) {
-    vector.push_back(this->nextDouble(lo, hi));
+    vector.push_back(this->next_double(lo, hi));
   }
   *out = vector;
 }
 
 long Random::getSeed() { return seed; }
+
+double Random::next_double_gauss(double avg, double std_dev) {
+  std::normal_distribution<double> dist(avg, std_dev);
+  return dist(*this->rng);
+}
