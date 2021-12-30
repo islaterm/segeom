@@ -4,6 +4,7 @@
 
 | Category         | Detail                                                             | Version | Status  |
 | ---------------- | ------------------------------------------------------------------ | ------- | ------- |
+| feat(polygon)    | Copy constructor                                                   | 1.0.5.7 | FAILING |
 | feat(polygon)    | Random polygon generator                                           | 1.0.5.6 | PASSING |
 | feat(polygon)    | GeometryException definition                                       | 1.0.5.5 | FAILING |
 | feat(polygon)    | Polygon inverted copy (diff. winding) & orientation dependent area | 1.0.5.4 | FAILING |

@@ -11,6 +11,16 @@ namespace segeom {
     segeom::primitives::Polygon<int> *make_random_polygon(Random *rng);
 
     /**
+     * @brief Creates a new regular polygon centered at (0, 0).
+     *
+     * @param num_points
+     *    the number of vertices of the polygon.
+     * @param radius
+     *    the radius of the circumscribed circle of the polygon.
+     */
+    segeom::primitives::Polygon<double> *make_regular_polygon(int num_points, int radius);
+
+    /**
      * @brief Generates the division of a circumference in random angles.
      *
      * @param steps

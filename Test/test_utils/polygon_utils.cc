@@ -39,3 +39,12 @@ std::vector<double> test_utils::random_angle_steps(int steps, double lo, double 
   }
   return angles;
 }
+
+segeom::primitives::Polygon<double> *test_utils::make_regular_polygon(int num_points, int radius) {
+  double step = 2 * std::numbers::pi / num_points;
+  std::vector<Point2D<double>> vertices;
+  for (double cums = 0; cums < 2 * std::numbers::pi; cums += step) {
+    vertices.push_back(Point2D<double>(radius * std::cos(cums), radius * std::sin(cums)));
+  }
+  return new Polygon<double>(vertices);
+}

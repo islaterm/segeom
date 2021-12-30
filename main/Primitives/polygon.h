@@ -33,6 +33,11 @@ namespace segeom {
       };
 
       /**
+       * @brief Copy constructor.
+       */
+      Polygon(const Polygon<T> &polygon) : vertices_(polygon.vertices_){};
+
+      /**
        * @brief Returns a copy of this polygon with inverted winding order.
        */
       Polygon<T> inverted();
