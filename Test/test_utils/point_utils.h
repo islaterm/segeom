@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common_utils.h"
-#include "main/primitives/point.h"
+#include "main/primitives/point.hpp"
 
 namespace segeom {
   namespace test_utils {

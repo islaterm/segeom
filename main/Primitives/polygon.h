@@ -48,6 +48,13 @@ namespace segeom {
       double area() const;
 
       /**
+       * @brief Checks if the points of this polygon are CCW or not.
+       *
+       * @return true when the points are in CCW order, false otherwise.
+       */
+      inline bool is_ccw() const;
+
+      /**
        * @brief Returns a vector containing the vertices of the polygon.
        */
       inline std::vector<Point2D<T>> vertices() const;
@@ -80,6 +87,11 @@ double Polygon<T>::area() const {
     throw segeom::GeometryException("Can't calculate area of malformed polygon");
   }
   return result * 0.5;
+}
+
+template <class T>
+inline bool Polygon<T>::is_ccw() const {
+  // TODO: implement
 }
 
 template <class T>

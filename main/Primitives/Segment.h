@@ -4,7 +4,7 @@
 #include <limits>
 
 #include "main/math_utils.h"
-#include "point.h"
+#include "point.hpp"
 
 namespace segeom {
   namespace primitives {

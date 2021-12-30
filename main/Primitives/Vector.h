@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "point.h"
+#include "point.hpp"
 
 namespace segeom {
   namespace primitives {

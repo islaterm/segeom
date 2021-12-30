@@ -4,6 +4,7 @@
 
 | Category         | Detail                                                             | Version | Status  |
 | ---------------- | ------------------------------------------------------------------ | ------- | ------- |
+| feat(polygon)    | is_ccw signature definition                                        | 1.0.5.8 | FAILING |
 | feat(polygon)    | Copy constructor                                                   | 1.0.5.7 | FAILING |
 | feat(polygon)    | Random polygon generator                                           | 1.0.5.6 | PASSING |
 | feat(polygon)    | GeometryException definition                                       | 1.0.5.5 | FAILING |
